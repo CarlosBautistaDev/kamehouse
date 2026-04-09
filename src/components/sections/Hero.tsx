@@ -1,22 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/Button";
-import { ParticlesCanvas } from "@/components/ui/ParticlesCanvas";
 
 export function Hero() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Gradient shifts as you scroll: starts dark, white creeps up
-  const gradientStop = Math.min(60 + scrollY * 0.05, 95);
-
   return (
     <section
       id="inicio"
@@ -29,63 +16,68 @@ export function Hero() {
       />
       {/* Fallback gradient when no image */}
       <div className="absolute inset-0 bg-bg-dark" />
-      {/* Gradient overlay: moves with scroll */}
-      <div
-        className="absolute inset-0 transition-none"
-        style={{
-          background: `linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) ${gradientStop - 20}%, white ${gradientStop}%)`,
-        }}
-      />
-
-      {/* Particles */}
-      <div className="absolute inset-0">
-        <ParticlesCanvas
-          colors={[
-            "255, 107, 53",   // naranja
-            "230, 57, 70",    // rojo
-            "34, 197, 94",    // verde
-            "56, 189, 248",   // azul cielo
-          ]}
-          particleCount={450}
-          connectionDistance={110}
-          speed={0.1}
-        />
-      </div>
+      {/* Gradient overlay: dark top → white bottom */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 via-60% to-white z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
-        <AnimatedSection>
-          <p className="text-accent-primary font-semibold tracking-[0.25em] uppercase text-sm md:text-base mb-4">
-            Entrenamiento Funcional &bull; Box &bull; Taekwondo
-          </p>
-        </AnimatedSection>
+      <div className="relative z-10 max-w-6xl mx-auto w-full" style={{ padding: '10px' }}>
+        {/* Clip wrapper */}
+        <div className="relative" style={{ isolation: 'isolate' }}>
+          {/* Palm tree — behind text, faded at edges */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/palm.png"
+            alt=""
+            className="hidden md:block absolute right-[2%] lg:right-[-2%] top-1/2 -translate-y-1/2 pointer-events-none w-[500px] lg:w-[700px] h-auto select-none"
+            style={{
+              zIndex: 0,
+              maskImage: 'radial-gradient(ellipse 60% 60% at 70% 50%, black 30%, transparent 70%)',
+              WebkitMaskImage: 'radial-gradient(ellipse 60% 60% at 70% 50%, black 30%, transparent 70%)',
+            }}
+            aria-hidden="true"
+          />
 
-        <AnimatedSection delay={150}>
-          <h1 className="font-heading text-7xl sm:text-8xl md:text-[10rem] leading-[0.85] tracking-wider text-white mb-2">
-            KAME HOUSE
-          </h1>
-          <p className="font-heading text-4xl sm:text-5xl md:text-7xl tracking-[0.3em] text-accent-primary">
-            TRAINING
-          </p>
-        </AnimatedSection>
+          <div className="relative text-center" style={{ zIndex: 1 }}>
+          <AnimatedSection>
+            <p className="text-accent-primary font-semibold tracking-[0.25em] uppercase text-sm md:text-base mb-4">
+              Entrenamiento Funcional &bull; Box &bull; Taekwondo
+            </p>
+          </AnimatedSection>
 
-        <AnimatedSection delay={350}>
-          <p className="text-white/60 text-base md:text-lg mt-8 mb-10 max-w-xl mx-auto">
-            Transforma tu cuerpo y mente con nuestros programas de
-            entrenamiento. Horarios flexibles, profesores experimentados.
-          </p>
-        </AnimatedSection>
+          <AnimatedSection delay={150}>
+            <h1 className="font-heading text-7xl sm:text-8xl md:text-[10rem] leading-[0.85] tracking-wider text-white mb-2">
+              KAME HOUSE
+            </h1>
+            <p className="font-heading text-4xl sm:text-5xl md:text-7xl tracking-[0.3em] text-accent-primary">
+              TRAINING
+            </p>
+          </AnimatedSection>
 
-        <AnimatedSection delay={500}>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button href="#horarios" size="lg">
-              Ver Horarios
-            </Button>
-            <Button href="#contacto" variant="outline" size="lg" className="border-white/30 text-white hover:bg-white hover:text-text-primary">
-              Contáctanos
-            </Button>
-          </div>
-        </AnimatedSection>
+          <AnimatedSection delay={350}>
+            <p className="text-white/60 text-base md:text-lg mt-8 mb-10 max-w-xl mx-auto">
+              Transforma tu cuerpo y mente con nuestros programas de
+              entrenamiento. Horarios flexibles, profesores experimentados.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection delay={500}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button href="#horarios" size="lg">
+                Ver Horarios
+              </Button>
+              <a
+                href="#contacto"
+                className="liquid-glass inline-flex items-center justify-center px-9 py-4.5 text-lg font-semibold text-white rounded-full transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+              >
+                <span className="lg-filter" />
+                <span className="lg-overlay" />
+                <span className="lg-specular" />
+                <span className="lg-content">Contáctanos</span>
+              </a>
+            </div>
+          </AnimatedSection>
+        </div>
+        </div>
       </div>
 
       {/* Scroll indicator */}

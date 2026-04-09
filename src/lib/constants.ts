@@ -136,7 +136,10 @@ export const COMING_SOON = [
 
 // ===== CONTACTO =====
 export const CONTACT = {
-  whatsapp: "521XXXXXXXXXX", // REEMPLAZAR → formato: 521 + 10 dígitos, ej: "5215512345678"
+  whatsapp: "5215564603210",
+  phone: "+52 55 6460 3210",
+  instagram: "https://www.instagram.com/kamehouse_19",
+  instagramHandle: "@kamehouse_19",
   address: "DIRECCIÓN DEL GYM", // REEMPLAZAR
   mapUrl: "https://maps.google.com/?q=...", // REEMPLAZAR
   mapEmbed: "https://www.google.com/maps/embed?pb=...", // REEMPLAZAR URL de embed

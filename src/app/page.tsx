@@ -6,12 +6,16 @@ import { ComingSoon } from "@/components/sections/ComingSoon";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 import { ParallaxSection } from "@/components/ui/ParallaxSection";
+import { ParallaxParticles } from "@/components/ui/ParallaxParticles";
 import { Button } from "@/components/ui/Button";
 import { CONTACT } from "@/lib/constants";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-bg-primary">
+      {/* Particles — fixed, moves slower than scroll */}
+      <ParallaxParticles />
+
       <Hero />
       <Services />
 

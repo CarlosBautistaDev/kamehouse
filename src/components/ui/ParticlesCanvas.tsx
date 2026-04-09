@@ -187,7 +187,8 @@ export function ParticlesCanvas({
     };
 
     const handleMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
+      if (!canvasRef.current) return;
+      const rect = canvasRef.current.getBoundingClientRect();
       mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     };
 
@@ -197,8 +198,8 @@ export function ParticlesCanvas({
 
     resize();
     window.addEventListener("resize", resize);
-    canvas.addEventListener("mousemove", handleMove);
-    canvas.addEventListener("mouseleave", handleLeave);
+    window.addEventListener("mousemove", handleMove);
+    window.addEventListener("mouseleave", handleLeave);
 
     const animate = () => {
       const rect = canvas.parentElement?.getBoundingClientRect();
@@ -213,15 +214,15 @@ export function ParticlesCanvas({
     return () => {
       cancelAnimationFrame(animationRef.current);
       window.removeEventListener("resize", resize);
-      canvas.removeEventListener("mousemove", handleMove);
-      canvas.removeEventListener("mouseleave", handleLeave);
+      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("mouseleave", handleLeave);
     };
   }, [initParticles, draw]);
 
   return (
     <canvas
       ref={canvasRef}
-      className={`pointer-events-auto ${className}`}
+      className={`pointer-events-none ${className}`}
       style={{ position: "absolute", inset: 0 }}
     />
   );

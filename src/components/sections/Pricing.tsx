@@ -34,7 +34,7 @@ export function Pricing() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: "url(/images/esferas-dragon.png)",
-          backgroundSize: "clamp(600px, 80vw, 1200px)",
+          backgroundSize: "clamp(200px, 27vw, 400px)",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           transform: `scale(${esferasScale}) translateY(${esferasY}px)`,
