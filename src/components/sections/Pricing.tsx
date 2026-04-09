@@ -1,17 +1,44 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { PriceCard } from "@/components/ui/PriceCard";
 import { PRICING, PAYMENT_NOTICE } from "@/lib/constants";
 
 export function Pricing() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // progress 0 when section enters viewport, 1 when fully scrolled past
+      const p = Math.max(0, Math.min(1, (vh - rect.top) / (vh + rect.height)));
+      setProgress(p);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Esferas: scale from 1.5x to 2.5x as you scroll, slight Y shift
+  const esferasScale = 1.5 + progress * 1;
+  const esferasY = -progress * 60;
+
   return (
-    <section id="precios" className="relative py-24 md:py-32 px-4 bg-bg-primary overflow-hidden">
-      {/* Dragon Balls parallax background */}
+    <section ref={sectionRef} id="precios" className="relative py-24 md:py-32 px-4 bg-bg-primary overflow-hidden">
+      {/* Dragon Balls parallax background — zoom on scroll */}
       <div
-        className="absolute inset-0 bg-center bg-no-repeat opacity-[0.07] pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: "url(/images/esferas-dragon.png)",
-          backgroundSize: "clamp(500px, 70vw, 1000px)",
-          backgroundAttachment: "scroll",
+          backgroundSize: "clamp(600px, 80vw, 1200px)",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          transform: `scale(${esferasScale}) translateY(${esferasY}px)`,
+          willChange: "transform",
         }}
         aria-hidden="true"
       />

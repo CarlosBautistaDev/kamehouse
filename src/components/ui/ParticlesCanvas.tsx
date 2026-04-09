@@ -8,8 +8,12 @@ interface Particle {
   vx: number;
   vy: number;
   radius: number;
+  baseRadius: number;
   opacity: number;
+  targetOpacity: number;
   color: string;
+  blinkTimer: number;
+  blinkDuration: number;
 }
 
 interface ParticlesCanvasProps {
@@ -47,14 +51,22 @@ export function ParticlesCanvas({
       const particles: Particle[] = [];
 
       for (let i = 0; i < count; i++) {
+        const baseRadius = Math.random() < 0.85
+          ? Math.random() * 1.5 + 0.3   // 85% pequeños: 0.3 - 1.8
+          : Math.random() * 2.5 + 2;     // 15% grandes: 2 - 4.5
+        const blinkDuration = Math.random() * 300 + 100; // frames hasta cambiar
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
           vx: (Math.random() - 0.5) * speed,
           vy: (Math.random() - 0.5) * speed,
-          radius: Math.random() * 2 + 1,
-          opacity: Math.random() * 0.5 + 0.2,
+          baseRadius,
+          radius: baseRadius,
+          opacity: Math.random() * 0.6 + 0.2,
+          targetOpacity: Math.random() * 0.7 + 0.1,
           color: colors[Math.floor(Math.random() * colors.length)],
+          blinkTimer: Math.floor(Math.random() * blinkDuration),
+          blinkDuration,
         });
       }
 
@@ -69,7 +81,6 @@ export function ParticlesCanvas({
       const particles = particlesRef.current;
       const mouse = mouseRef.current;
 
-      // Update positions
       for (const p of particles) {
         p.x += p.vx;
         p.y += p.vy;
@@ -77,20 +88,48 @@ export function ParticlesCanvas({
         if (p.x < 0 || p.x > width) p.vx *= -1;
         if (p.y < 0 || p.y > height) p.vy *= -1;
 
-        // Subtle mouse repulsion
+        // Strong mouse repulsion
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 100) {
-          p.vx += dx * 0.0003;
-          p.vy += dy * 0.0003;
+        if (dist < 200) {
+          const force = (200 - dist) / 200;
+          p.vx += (dx / dist) * force * 0.8;
+          p.vy += (dy / dist) * force * 0.8;
         }
 
-        // Speed limit
+        // Speed limit (higher to allow burst from mouse)
         const spd = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-        if (spd > speed * 1.5) {
-          p.vx = (p.vx / spd) * speed;
-          p.vy = (p.vy / spd) * speed;
+        if (spd > speed * 4) {
+          p.vx = (p.vx / spd) * speed * 4;
+          p.vy = (p.vy / spd) * speed * 4;
+        }
+        // Friction to settle back
+        p.vx *= 0.995;
+        p.vy *= 0.995;
+
+        // Random burst: occasionally a particle darts in a random direction
+        if (Math.random() < 0.002) {
+          const angle = Math.random() * Math.PI * 2;
+          const burst = speed * 6;
+          p.vx += Math.cos(angle) * burst;
+          p.vy += Math.sin(angle) * burst;
+        }
+
+        // Blink: fade toward targetOpacity, then pick new target
+        p.blinkTimer--;
+        if (p.blinkTimer <= 0) {
+          p.targetOpacity = Math.random() < 0.15 ? 0 : Math.random() * 0.7 + 0.1;
+          p.blinkDuration = Math.random() * 300 + 60;
+          p.blinkTimer = p.blinkDuration;
+        }
+        p.opacity += (p.targetOpacity - p.opacity) * 0.05;
+
+        // Pulse radius near mouse
+        if (dist < 200) {
+          p.radius = p.baseRadius * (1 + (200 - dist) / 200 * 0.8);
+        } else {
+          p.radius += (p.baseRadius - p.radius) * 0.05;
         }
       }
 
@@ -102,10 +141,11 @@ export function ParticlesCanvas({
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < connectionDistance) {
-            const opacity = (1 - dist / connectionDistance) * 0.15;
+            const opacity = (1 - dist / connectionDistance) * 0.15 * Math.min(particles[i].opacity, particles[j].opacity);
+            if (opacity < 0.005) continue;
             ctx.beginPath();
             ctx.strokeStyle = `rgba(${particles[i].color}, ${opacity})`;
-            ctx.lineWidth = 0.8;
+            ctx.lineWidth = 2.4;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
@@ -115,6 +155,7 @@ export function ParticlesCanvas({
 
       // Draw particles
       for (const p of particles) {
+        if (p.opacity < 0.01) continue; // invisible, skip
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${p.color}, ${p.opacity})`;

@@ -1,10 +1,22 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/Button";
 import { ParticlesCanvas } from "@/components/ui/ParticlesCanvas";
 
 export function Hero() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Gradient shifts as you scroll: starts dark, white creeps up
+  const gradientStop = Math.min(60 + scrollY * 0.05, 95);
+
   return (
     <section
       id="inicio"
@@ -17,8 +29,13 @@ export function Hero() {
       />
       {/* Fallback gradient when no image */}
       <div className="absolute inset-0 bg-bg-dark" />
-      {/* Gradient overlay: dark top → fades to white at bottom */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 via-60% to-white" />
+      {/* Gradient overlay: moves with scroll */}
+      <div
+        className="absolute inset-0 transition-none"
+        style={{
+          background: `linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) ${gradientStop - 20}%, white ${gradientStop}%)`,
+        }}
+      />
 
       {/* Particles */}
       <div className="absolute inset-0">
@@ -29,9 +46,9 @@ export function Hero() {
             "34, 197, 94",    // verde
             "56, 189, 248",   // azul cielo
           ]}
-          particleCount={90}
-          connectionDistance={130}
-          speed={0.25}
+          particleCount={450}
+          connectionDistance={110}
+          speed={0.1}
         />
       </div>
 

@@ -15,10 +15,10 @@ export function PriceCard({
 }: PriceCardProps) {
   return (
     <div
-      className={`relative p-8 text-center rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
+      className={`relative p-8 text-center rounded-3xl transition-all duration-300 hover:-translate-y-1 ${
         highlighted
           ? "bg-accent-primary text-white shadow-xl shadow-accent-primary/20 scale-[1.02]"
-          : "glass"
+          : "liquid-glass"
       }`}
     >
       {badge && (
