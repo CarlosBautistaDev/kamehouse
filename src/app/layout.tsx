@@ -110,7 +110,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}if(history.scrollRestoration)history.scrollRestoration='manual';window.scrollTo(0,0);if(location.hash){history.replaceState(null,'',location.pathname+location.search)}})()`,
           }}
         />
         <script
