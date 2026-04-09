@@ -7,7 +7,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden"
     >
       {/* Background image */}
       <div

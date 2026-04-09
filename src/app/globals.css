@@ -316,3 +316,14 @@ html {
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
+
+/* Prevent layout shift from Safari bar resize */
+html {
+  overflow-y: scroll;
+}
+
+@supports (height: 100svh) {
+  body {
+    min-height: 100svh;
+  }
+}
