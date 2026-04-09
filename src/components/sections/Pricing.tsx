@@ -8,23 +8,33 @@ import { PRICING, PAYMENT_NOTICE } from "@/lib/constants";
 export function Pricing() {
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
+  useEffect(() => {
+    let ticking = false;
     const onScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const vh = window.innerHeight;
-      // progress 0 when section enters viewport, 1 when fully scrolled past
-      const p = Math.max(0, Math.min(1, (vh - rect.top) / (vh + rect.height)));
-      setProgress(p);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        if (!sectionRef.current) { ticking = false; return; }
+        const rect = sectionRef.current.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const p = Math.max(0, Math.min(1, (vh - rect.top) / (vh + rect.height)));
+        setProgress(p);
+        ticking = false;
+      });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Esferas: scale from 1.5x to 2.5x as you scroll, slight Y shift
-  const esferasScale = 1.5 + progress * 1;
+  // Mobile: bigger range (0.8x → 3.5x), Desktop: 1.5x → 2.5x
+  const esferasScale = isMobile ? 0.8 + progress * 2.7 : 1.5 + progress * 1;
   const esferasY = -progress * 60;
 
   return (
@@ -34,7 +44,7 @@ export function Pricing() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: "url(/images/esferas-dragon.png)",
-          backgroundSize: "clamp(200px, 27vw, 400px)",
+          backgroundSize: "clamp(280px, 50vw, 400px)",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           transform: `scale(${esferasScale}) translateY(${esferasY}px)`,

@@ -36,8 +36,8 @@ body {
 /* ===== GLASSMORPHISM — LIGHT ===== */
 .glass {
   background: var(--glass-bg);
-  backdrop-filter: blur(40px) saturate(1.8);
-  -webkit-backdrop-filter: blur(40px) saturate(1.8);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
   border: 1px solid var(--glass-border);
   border-radius: 20px;
   box-shadow:
@@ -79,7 +79,13 @@ body {
   z-index: 0;
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
-  filter: url(#lg-dist);
+}
+
+/* SVG distortion only on desktop — kills perf on Safari iOS */
+@media (min-width: 768px) {
+  .lg-filter {
+    filter: url(#lg-dist);
+  }
 }
 
 /* Layer 2: Tinted overlay */
