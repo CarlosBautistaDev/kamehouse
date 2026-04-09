@@ -1,21 +1,28 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg-primary: #FFFFFF;
-  --color-bg-secondary: #F7F7F8;
-  --color-bg-dark: #0C0C0C;
-  --color-bg-elevated: #FFFFFF;
+  --color-bg-primary: var(--theme-bg-primary);
+  --color-bg-secondary: var(--theme-bg-secondary);
+  --color-bg-dark: var(--theme-bg-dark);
+  --color-bg-elevated: var(--theme-bg-elevated);
   --color-accent-primary: #FF6B35;
   --color-accent-secondary: #E63946;
-  --color-text-primary: #1A1A1A;
-  --color-text-secondary: #6B7280;
-  --color-text-tertiary: #9CA3AF;
+  --color-text-primary: var(--theme-text-primary);
+  --color-text-secondary: var(--theme-text-secondary);
+  --color-text-tertiary: var(--theme-text-tertiary);
   --color-text-on-dark: #FFFFFF;
   --font-heading: var(--font-bebas-neue);
   --font-body: var(--font-inter);
 }
 
 :root {
+  --theme-bg-primary: #FFFFFF;
+  --theme-bg-secondary: #F7F7F8;
+  --theme-bg-dark: #0C0C0C;
+  --theme-bg-elevated: #FFFFFF;
+  --theme-text-primary: #1A1A1A;
+  --theme-text-secondary: #6B7280;
+  --theme-text-tertiary: #9CA3AF;
   --accent-glow: rgba(255, 107, 53, 0.2);
   --glass-bg: rgba(255, 255, 255, 0.45);
   --glass-border: rgba(255, 255, 255, 0.6);
@@ -26,13 +33,13 @@
 
 /* ===== DARK MODE OVERRIDES ===== */
 html.dark {
-  --color-bg-primary: #0C0C0C;
-  --color-bg-secondary: #141416;
-  --color-bg-dark: #000000;
-  --color-bg-elevated: #1A1A1C;
-  --color-text-primary: #F0F0F0;
-  --color-text-secondary: #9CA3AF;
-  --color-text-tertiary: #6B7280;
+  --theme-bg-primary: #0C0C0C;
+  --theme-bg-secondary: #141416;
+  --theme-bg-dark: #000000;
+  --theme-bg-elevated: #1A1A1C;
+  --theme-text-primary: #F0F0F0;
+  --theme-text-secondary: #9CA3AF;
+  --theme-text-tertiary: #6B7280;
   --accent-glow: rgba(255, 107, 53, 0.3);
   --glass-bg: rgba(30, 30, 30, 0.6);
   --glass-border: rgba(255, 255, 255, 0.1);
