@@ -33,8 +33,8 @@ export function Pricing() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Mobile: bigger range (0.8x → 3.5x), Desktop: 1.5x → 2.5x
-  const esferasScale = isMobile ? 0.8 + progress * 2.7 : 1.5 + progress * 1;
+  // Mobile: 0.4x → 3.5x, Desktop: 0.6x → 3x
+  const esferasScale = isMobile ? 0.4 + progress * 3.1 : 0.6 + progress * 2.4;
   const esferasY = -progress * 60;
 
   return (
@@ -44,7 +44,7 @@ export function Pricing() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: "url(/images/esferas-dragon.png)",
-          backgroundSize: "clamp(280px, 50vw, 400px)",
+          backgroundSize: "clamp(280px, 50vw, 500px)",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           transform: `scale(${esferasScale}) translateY(${esferasY}px)`,
