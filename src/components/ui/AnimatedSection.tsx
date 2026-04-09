@@ -19,9 +19,12 @@ export function AnimatedSection({
     <div
       ref={ref}
       className={`${className} ${
-        isVisible ? "animate-fade-in-up" : "opacity-0"
+        isVisible ? "animate-fade-in-up" : ""
       }`}
-      style={{ animationDelay: `${delay}ms` }}
+      style={{
+        opacity: isVisible ? undefined : 0,
+        animationDelay: `${delay}ms`,
+      }}
     >
       {children}
     </div>
