@@ -4,8 +4,14 @@ import { PRICING, PAYMENT_NOTICE } from "@/lib/constants";
 
 export function Pricing() {
   return (
-    <section id="precios" className="py-24 md:py-32 px-4 bg-bg-primary">
-      <div className="max-w-5xl mx-auto">
+    <section id="precios" className="relative py-24 md:py-32 px-4 bg-bg-primary overflow-hidden">
+      {/* Dragon Balls parallax background */}
+      <div
+        className="absolute inset-0 bg-[url('/images/esferas-dragon.png')] bg-center bg-no-repeat opacity-[0.04] pointer-events-none parallax-section"
+        style={{ backgroundSize: "clamp(600px, 80vw, 1200px)" }}
+        aria-hidden="true"
+      />
+      <div className="max-w-5xl mx-auto relative z-10">
         <AnimatedSection>
           <p className="text-accent-primary font-semibold text-sm tracking-[0.2em] uppercase text-center mb-3">
             Planes

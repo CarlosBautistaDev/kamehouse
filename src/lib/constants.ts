@@ -136,7 +136,7 @@ export const COMING_SOON = [
 
 // ===== CONTACTO =====
 export const CONTACT = {
-  whatsapp: "52XXXXXXXXXX", // REEMPLAZAR con número real
+  whatsapp: "521XXXXXXXXXX", // REEMPLAZAR → formato: 521 + 10 dígitos, ej: "5215512345678"
   address: "DIRECCIÓN DEL GYM", // REEMPLAZAR
   mapUrl: "https://maps.google.com/?q=...", // REEMPLAZAR
   mapEmbed: "https://www.google.com/maps/embed?pb=...", // REEMPLAZAR URL de embed
