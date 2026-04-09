@@ -9,22 +9,29 @@ interface Particle {
   vy: number;
   radius: number;
   opacity: number;
+  color: string;
 }
 
 interface ParticlesCanvasProps {
   className?: string;
-  particleColor?: string;
-  lineColor?: string;
+  colors?: string[];
   particleCount?: number;
   connectionDistance?: number;
   speed?: number;
 }
 
+const DEFAULT_COLORS = [
+  "255, 107, 53",   // naranja (accent)
+  "230, 57, 70",    // rojo
+  "34, 197, 94",    // verde
+  "56, 189, 248",   // azul cielo
+  "99, 102, 241",   // azul índigo
+];
+
 export function ParticlesCanvas({
   className = "",
-  particleColor = "255, 107, 53",
-  lineColor = "255, 107, 53",
-  particleCount = 60,
+  colors = DEFAULT_COLORS,
+  particleCount = 80,
   connectionDistance = 120,
   speed = 0.3,
 }: ParticlesCanvasProps) {
@@ -47,12 +54,13 @@ export function ParticlesCanvas({
           vy: (Math.random() - 0.5) * speed,
           radius: Math.random() * 2 + 1,
           opacity: Math.random() * 0.5 + 0.2,
+          color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
 
       particlesRef.current = particles;
     },
-    [particleCount, speed]
+    [particleCount, speed, colors]
   );
 
   const draw = useCallback(
@@ -96,7 +104,7 @@ export function ParticlesCanvas({
           if (dist < connectionDistance) {
             const opacity = (1 - dist / connectionDistance) * 0.15;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(${lineColor}, ${opacity})`;
+            ctx.strokeStyle = `rgba(${particles[i].color}, ${opacity})`;
             ctx.lineWidth = 0.8;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -109,11 +117,11 @@ export function ParticlesCanvas({
       for (const p of particles) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${particleColor}, ${p.opacity})`;
+        ctx.fillStyle = `rgba(${p.color}, ${p.opacity})`;
         ctx.fill();
       }
     },
-    [particleColor, lineColor, connectionDistance, speed]
+    [connectionDistance, speed]
   );
 
   useEffect(() => {

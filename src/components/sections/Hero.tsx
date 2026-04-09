@@ -17,15 +17,19 @@ export function Hero() {
       />
       {/* Fallback gradient when no image */}
       <div className="absolute inset-0 bg-bg-dark" />
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+      {/* Gradient overlay: dark top → fades to white at bottom */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 via-60% to-white" />
 
       {/* Particles */}
       <div className="absolute inset-0">
         <ParticlesCanvas
-          particleColor="255, 107, 53"
-          lineColor="255, 107, 53"
-          particleCount={55}
+          colors={[
+            "255, 107, 53",   // naranja
+            "230, 57, 70",    // rojo
+            "34, 197, 94",    // verde
+            "56, 189, 248",   // azul cielo
+          ]}
+          particleCount={90}
           connectionDistance={130}
           speed={0.25}
         />
@@ -71,7 +75,7 @@ export function Hero() {
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
         <div className="animate-scroll-hint">
           <svg
-            className="w-6 h-6 text-white/40"
+            className="w-6 h-6 text-text-secondary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

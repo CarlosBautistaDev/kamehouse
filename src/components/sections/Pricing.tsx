@@ -7,8 +7,12 @@ export function Pricing() {
     <section id="precios" className="relative py-24 md:py-32 px-4 bg-bg-primary overflow-hidden">
       {/* Dragon Balls parallax background */}
       <div
-        className="absolute inset-0 bg-[url('/images/esferas-dragon.png')] bg-center bg-no-repeat opacity-[0.04] pointer-events-none parallax-section"
-        style={{ backgroundSize: "clamp(600px, 80vw, 1200px)" }}
+        className="absolute inset-0 bg-center bg-no-repeat opacity-[0.07] pointer-events-none"
+        style={{
+          backgroundImage: "url(/images/esferas-dragon.png)",
+          backgroundSize: "clamp(500px, 70vw, 1000px)",
+          backgroundAttachment: "scroll",
+        }}
         aria-hidden="true"
       />
       <div className="max-w-5xl mx-auto relative z-10">
