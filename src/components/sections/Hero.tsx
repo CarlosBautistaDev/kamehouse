@@ -1,9 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/Button";
 
 export function Hero() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsDark(document.documentElement.classList.contains("dark"));
+    check();
+    const observer = new MutationObserver(check);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
   return (
     <section
       id="inicio"
@@ -16,8 +26,15 @@ export function Hero() {
       />
       {/* Fallback gradient when no image */}
       <div className="absolute inset-0 bg-bg-dark" />
-      {/* Gradient overlay: dark top → white bottom */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 via-60% to-white z-[1]" />
+      {/* Gradient overlay: adapts to theme */}
+      <div
+        className="absolute inset-0 z-[1] transition-colors duration-500"
+        style={{
+          background: isDark
+            ? "linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, #0C0C0C 100%)"
+            : "linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 60%, white 100%)",
+        }}
+      />
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto w-full" style={{ padding: '10px' }}>
@@ -28,7 +45,7 @@ export function Hero() {
           <img
             src="/images/palm.png"
             alt=""
-            className="hidden md:block absolute right-[2%] lg:right-[-2%] top-1/2 -translate-y-1/2 pointer-events-none w-[500px] lg:w-[700px] h-auto select-none"
+            className="absolute right-[-5%] md:right-[2%] lg:right-[-2%] top-1/2 -translate-y-1/2 pointer-events-none w-[250px] md:w-[500px] lg:w-[700px] h-auto select-none"
             style={{
               zIndex: 0,
               maskImage: 'radial-gradient(ellipse 60% 60% at 70% 50%, black 30%, transparent 70%)',

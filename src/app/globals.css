@@ -24,6 +24,23 @@
   --glass-dark-border: rgba(255, 255, 255, 0.1);
 }
 
+/* ===== DARK MODE OVERRIDES ===== */
+html.dark {
+  --color-bg-primary: #0C0C0C;
+  --color-bg-secondary: #141416;
+  --color-bg-dark: #000000;
+  --color-bg-elevated: #1A1A1C;
+  --color-text-primary: #F0F0F0;
+  --color-text-secondary: #9CA3AF;
+  --color-text-tertiary: #6B7280;
+  --accent-glow: rgba(255, 107, 53, 0.3);
+  --glass-bg: rgba(30, 30, 30, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-hover: rgba(40, 40, 40, 0.7);
+  --glass-dark-bg: rgba(0, 0, 0, 0.6);
+  --glass-dark-border: rgba(255, 255, 255, 0.08);
+}
+
 /* ===== BASE ===== */
 body {
   background: var(--color-bg-primary);
@@ -308,6 +325,14 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #9ca3af;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
 }
 
 /* ===== iOS / MOBILE SAFE AREAS ===== */

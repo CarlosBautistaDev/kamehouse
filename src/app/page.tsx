@@ -7,12 +7,14 @@ import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 import { ParallaxSection } from "@/components/ui/ParallaxSection";
 import { ParallaxParticles } from "@/components/ui/ParallaxParticles";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Button } from "@/components/ui/Button";
 import { CONTACT } from "@/lib/constants";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-bg-primary">
+    <main className="min-h-screen bg-bg-primary transition-colors duration-300">
+      <ThemeToggle />
       {/* Particles — fixed, moves slower than scroll */}
       <ParallaxParticles />
 

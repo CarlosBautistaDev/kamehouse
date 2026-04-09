@@ -21,7 +21,7 @@ const variantClasses = {
   ghost:
     "text-text-secondary hover:text-text-primary hover:bg-black/5",
   white:
-    "bg-white text-text-primary shadow-lg hover:shadow-xl active:scale-[0.97]",
+    "bg-bg-primary text-text-primary shadow-lg hover:shadow-xl active:scale-[0.97]",
 };
 
 export function Button({

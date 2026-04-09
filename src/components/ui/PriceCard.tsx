@@ -17,7 +17,7 @@ export function PriceCard({
     return (
       <div className="relative p-8 text-center rounded-3xl transition-all duration-300 hover:-translate-y-1 bg-accent-primary text-white shadow-xl shadow-accent-primary/20 scale-[1.02]">
         {badge && (
-          <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold px-4 py-1 rounded-full bg-white text-accent-primary">
+          <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold px-4 py-1 rounded-full bg-bg-primary text-accent-primary">
             {badge}
           </span>
         )}
