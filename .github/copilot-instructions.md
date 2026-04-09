@@ -2,7 +2,7 @@
 
 ## Proyecto
 
-**Kame House Training** — Landing page estática para gym de entrenamiento funcional, box y taekwondo. Temática visual inspirada en Kame House de Dragon Ball Z con diseño glassmorphism minimalista oscuro.
+**Kame House Training** — Landing page estática para gym de entrenamiento funcional, box y taekwondo. Diseño sofisticado minimalista con tema blanco, glassmorphism light, partículas canvas y secciones parallax.
 
 ## Stack
 
@@ -23,7 +23,7 @@ src/
 │   └── globals.css         # Tailwind imports, CSS variables, keyframes, glass
 ├── components/
 │   ├── sections/           # Hero, Services, Schedule, Pricing, ComingSoon, Contact, Footer
-│   └── ui/                 # GlassCard, Button, Badge, TabSelector, PriceCard, AnimatedSection
+│   └── ui/                 # GlassCard, Button, Badge, TabSelector, PriceCard, AnimatedSection, ParticlesCanvas, ParallaxSection
 ├── hooks/
 │   ├── useScrollAnimation.ts   # IntersectionObserver → ref + isVisible
 │   └── useActiveSection.ts     # Track sección visible para nav
@@ -37,12 +37,13 @@ src/
 
 | Variable | Valor | Uso |
 |----------|-------|-----|
-| `--color-bg-primary` | `#0a0a0a` | Fondo principal |
-| `--color-bg-secondary` | `#111111` | Secciones alternas |
+| `--color-bg-primary` | `#FFFFFF` | Fondo principal |
+| `--color-bg-secondary` | `#F7F7F8` | Secciones alternas |
+| `--color-bg-dark` | `#0C0C0C` | Hero, footer |
 | `--color-accent-primary` | `#FF6B35` | Naranja Dragon Ball — CTAs |
 | `--color-accent-secondary` | `#E63946` | Rojo — badges, alerts |
-| `--color-text-primary` | `#FFFFFF` | Texto principal |
-| `--color-text-secondary` | `#A1A1AA` | Texto muted |
+| `--color-text-primary` | `#1A1A1A` | Texto principal |
+| `--color-text-secondary` | `#6B7280` | Texto muted |
 
 ## Tipografía
 
