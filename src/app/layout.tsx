@@ -113,7 +113,17 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-body">{children}</body>
+      <body className="min-h-full flex flex-col font-body">
+        {children}
+        {/* SVG filter for liquid glass distortion */}
+        <svg style={{ display: "none" }} aria-hidden="true">
+          <filter id="lg-dist" x="0%" y="0%" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves={2} seed={92} result="noise" />
+            <feGaussianBlur in="noise" stdDeviation={2} result="blurred" />
+            <feDisplacementMap in="SourceGraphic" in2="blurred" scale={70} xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </svg>
+      </body>
     </html>
   );
 }
