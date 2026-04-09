@@ -13,7 +13,12 @@ export function AnimatedSection({
   className = "",
   delay = 0,
 }: AnimatedSectionProps) {
-  const { ref, isVisible } = useScrollAnimation(0.1);
+  const { ref, isVisible, isMobile } = useScrollAnimation(0.1);
+
+  // Mobile: sin animaciones, todo visible directo
+  if (isMobile) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <div

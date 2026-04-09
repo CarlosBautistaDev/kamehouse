@@ -5,10 +5,18 @@ import { useEffect, useRef, useState } from "react";
 export function useScrollAnimation(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [hasMounted, setHasMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setHasMounted(true);
+    const mobile = window.innerWidth < 768;
+    setIsMobile(mobile);
+
+    // En mobile, mostrar todo directo sin animaciones
+    if (mobile) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -23,5 +31,5 @@ export function useScrollAnimation(threshold = 0.1) {
     return () => observer.disconnect();
   }, [threshold]);
 
-  return { ref, isVisible: hasMounted && isVisible };
+  return { ref, isVisible, isMobile };
 }
