@@ -1,55 +1,85 @@
+"use client";
+
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { ParticlesCanvas } from "@/components/ui/ParticlesCanvas";
 
 export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
+      className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,107,53,0.08)_0%,transparent_70%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(230,57,70,0.05)_0%,transparent_50%)]" />
-
-      {/* Grid pattern */}
+      {/* Background image */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url(/images/hero-bg.jpg)" }}
       />
+      {/* Fallback gradient when no image */}
+      <div className="absolute inset-0 bg-bg-dark" />
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
 
-      <div className="relative z-10 text-center max-w-4xl mx-auto">
+      {/* Particles */}
+      <div className="absolute inset-0">
+        <ParticlesCanvas
+          particleColor="255, 107, 53"
+          lineColor="255, 107, 53"
+          particleCount={55}
+          connectionDistance={130}
+          speed={0.25}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
         <AnimatedSection>
-          {/* Logo text */}
-          <h1 className="font-heading text-7xl md:text-9xl tracking-wider text-white mb-2">
-            KAME HOUSE
-          </h1>
-          <p className="font-heading text-3xl md:text-5xl tracking-[0.3em] text-accent-primary mb-6">
-            TRAINING
-          </p>
-        </AnimatedSection>
-
-        <AnimatedSection delay={200}>
-          <p className="text-text-secondary text-lg md:text-xl mb-8 font-body">
+          <p className="text-accent-primary font-semibold tracking-[0.25em] uppercase text-sm md:text-base mb-4">
             Entrenamiento Funcional &bull; Box &bull; Taekwondo
           </p>
         </AnimatedSection>
 
-        <AnimatedSection delay={400}>
-          <Badge variant="pulse" className="mb-8 text-base">
-            🔥 INAUGURACIÓN
-          </Badge>
+        <AnimatedSection delay={150}>
+          <h1 className="font-heading text-7xl sm:text-8xl md:text-[10rem] leading-[0.85] tracking-wider text-white mb-2">
+            KAME HOUSE
+          </h1>
+          <p className="font-heading text-4xl sm:text-5xl md:text-7xl tracking-[0.3em] text-accent-primary">
+            TRAINING
+          </p>
         </AnimatedSection>
 
-        <AnimatedSection delay={600}>
-          <Button href="#horarios" size="lg">
-            Ver Horarios ↓
-          </Button>
+        <AnimatedSection delay={350}>
+          <p className="text-white/60 text-base md:text-lg mt-8 mb-10 max-w-xl mx-auto">
+            Transforma tu cuerpo y mente con nuestros programas de
+            entrenamiento. Horarios flexibles, profesores experimentados.
+          </p>
         </AnimatedSection>
+
+        <AnimatedSection delay={500}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button href="#horarios" size="lg">
+              Ver Horarios
+            </Button>
+            <Button href="#contacto" variant="outline" size="lg" className="border-white/30 text-white hover:bg-white hover:text-text-primary">
+              Contáctanos
+            </Button>
+          </div>
+        </AnimatedSection>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+        <div className="animate-scroll-hint">
+          <svg
+            className="w-6 h-6 text-white/40"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7" />
+          </svg>
+        </div>
       </div>
     </section>
   );

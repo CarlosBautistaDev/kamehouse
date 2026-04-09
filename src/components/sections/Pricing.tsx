@@ -4,24 +4,27 @@ import { PRICING, PAYMENT_NOTICE } from "@/lib/constants";
 
 export function Pricing() {
   return (
-    <section id="precios" className="py-20 px-4 bg-bg-secondary">
+    <section id="precios" className="py-24 md:py-32 px-4 bg-bg-primary">
       <div className="max-w-5xl mx-auto">
         <AnimatedSection>
-          <h2 className="font-heading text-5xl md:text-6xl text-center text-white mb-4">
+          <p className="text-accent-primary font-semibold text-sm tracking-[0.2em] uppercase text-center mb-3">
+            Planes
+          </p>
+          <h2 className="font-heading text-5xl md:text-7xl text-center text-text-primary mb-4">
             PRECIOS
           </h2>
-          <p className="text-text-secondary text-center text-lg mb-12">
-            Planes accesibles para todos
+          <p className="text-text-secondary text-center text-lg mb-16">
+            Planes accesibles para todos los niveles
           </p>
         </AnimatedSection>
 
         {/* Individual */}
         <AnimatedSection delay={100}>
-          <h3 className="font-heading text-2xl text-text-secondary text-center mb-6">
+          <h3 className="font-heading text-2xl text-text-secondary text-center mb-8">
             ACTIVIDAD INDIVIDUAL
           </h3>
         </AnimatedSection>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {PRICING.individual.map((plan, index) => (
             <AnimatedSection key={plan.period} delay={150 + index * 100}>
               <PriceCard
@@ -37,11 +40,11 @@ export function Pricing() {
 
         {/* Combo */}
         <AnimatedSection delay={200}>
-          <h3 className="font-heading text-2xl text-text-secondary text-center mb-6">
+          <h3 className="font-heading text-2xl text-text-secondary text-center mb-8">
             COMBO — {PRICING.combo.title}
           </h3>
         </AnimatedSection>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
           {PRICING.combo.plans.map((plan, index) => (
             <AnimatedSection key={plan.period} delay={250 + index * 100}>
               <PriceCard price={plan.price} period={plan.period} />
@@ -51,10 +54,10 @@ export function Pricing() {
 
         {/* Taekwondo */}
         <AnimatedSection delay={300}>
-          <h3 className="font-heading text-2xl text-text-secondary text-center mb-6">
+          <h3 className="font-heading text-2xl text-text-secondary text-center mb-8">
             TAEKWONDO
           </h3>
-          <div className="max-w-xs mx-auto mb-12">
+          <div className="max-w-xs mx-auto mb-16">
             <PriceCard
               price={PRICING.taekwondo.price}
               period={PRICING.taekwondo.period}
@@ -65,14 +68,14 @@ export function Pricing() {
 
         {/* Payment Notice */}
         <AnimatedSection delay={400}>
-          <div className="glass border-accent-secondary/50 p-6 max-w-2xl mx-auto">
-            <h4 className="font-heading text-xl text-accent-secondary mb-3">
+          <div className="rounded-2xl border border-accent-secondary/20 bg-accent-secondary/5 p-6 md:p-8 max-w-2xl mx-auto">
+            <h4 className="font-heading text-xl text-accent-secondary mb-4">
               ⚠️ AVISO IMPORTANTE
             </h4>
-            <ul className="space-y-2 mb-3">
+            <ul className="space-y-2 mb-4">
               {PAYMENT_NOTICE.rules.map((rule) => (
                 <li key={rule} className="text-text-secondary text-sm flex gap-2">
-                  <span className="text-accent-secondary">•</span>
+                  <span className="text-accent-secondary mt-0.5">•</span>
                   {rule}
                 </li>
               ))}

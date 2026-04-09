@@ -8,15 +8,15 @@ interface TabSelectorProps {
 
 export function TabSelector({ tabs, activeTab, onChange }: TabSelectorProps) {
   return (
-    <div className="glass inline-flex p-1 gap-1">
+    <div className="inline-flex p-1.5 gap-1 bg-bg-secondary rounded-2xl">
       {tabs.map((tab, index) => (
         <button
           key={tab}
           onClick={() => onChange(index)}
-          className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer ${
+          className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer ${
             activeTab === index
-              ? "bg-accent-primary text-white shadow-lg"
-              : "text-text-secondary hover:text-white"
+              ? "bg-accent-primary text-white shadow-lg shadow-accent-primary/25"
+              : "text-text-secondary hover:text-text-primary"
           }`}
         >
           {tab}

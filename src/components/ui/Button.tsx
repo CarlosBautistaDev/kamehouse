@@ -1,6 +1,6 @@
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: "primary" | "outline" | "ghost";
+  variant?: "primary" | "outline" | "ghost" | "white";
   size?: "sm" | "md" | "lg";
   href?: string;
   onClick?: () => void;
@@ -8,18 +8,20 @@ interface ButtonProps {
 }
 
 const sizeClasses = {
-  sm: "px-4 py-2 text-sm",
-  md: "px-6 py-3 text-base",
-  lg: "px-8 py-4 text-lg",
+  sm: "px-5 py-2.5 text-sm",
+  md: "px-7 py-3.5 text-base",
+  lg: "px-9 py-4.5 text-lg",
 };
 
 const variantClasses = {
   primary:
-    "bg-accent-primary text-white hover:shadow-[0_0_30px_rgba(255,107,53,0.4)] active:scale-95",
+    "bg-accent-primary text-white shadow-lg shadow-accent-primary/25 hover:shadow-xl hover:shadow-accent-primary/30 hover:brightness-110 active:scale-[0.97]",
   outline:
     "border-2 border-accent-primary text-accent-primary hover:bg-accent-primary hover:text-white",
   ghost:
-    "text-text-secondary hover:text-white hover:bg-white/5",
+    "text-text-secondary hover:text-text-primary hover:bg-black/5",
+  white:
+    "bg-white text-text-primary shadow-lg hover:shadow-xl active:scale-[0.97]",
 };
 
 export function Button({

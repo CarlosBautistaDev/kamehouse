@@ -14,6 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kamehousetraining.com"),
   title: "Kame House Training | Entrenamiento Funcional, Box y Taekwondo",
   description:
     "Gym de entrenamiento funcional, box y taekwondo. CrossFit, Calistenia, HYROX y más. Horarios flexibles desde $300/semana. ¡Inscríbete hoy!",
