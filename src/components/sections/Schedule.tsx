@@ -151,7 +151,7 @@ export function Schedule() {
   return (
     <section id="horarios" className="py-24 md:py-32 px-4 bg-bg-secondary">
       <div className="max-w-3xl mx-auto">
-        <AnimatedSection>
+        <AnimatedSection animation="blur-scale">
           <p className="text-accent-primary font-semibold text-sm tracking-[0.2em] uppercase text-center mb-3">
             Horarios
           </p>
@@ -163,7 +163,7 @@ export function Schedule() {
           </p>
         </AnimatedSection>
 
-        <AnimatedSection delay={200}>
+        <AnimatedSection delay={200} animation="fade-up">
           <div className="flex justify-center mb-10">
             <TabSelector
               tabs={tabs}
@@ -173,7 +173,7 @@ export function Schedule() {
           </div>
         </AnimatedSection>
 
-        <AnimatedSection delay={300}>
+        <AnimatedSection delay={300} animation="blur-up">
           {activeTab === 0 && <BoxTab />}
           {activeTab === 1 && <FunctionalTab />}
           {activeTab === 2 && <TkdTab />}

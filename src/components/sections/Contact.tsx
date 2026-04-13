@@ -6,7 +6,7 @@ export function Contact() {
   return (
     <section id="contacto" className="py-24 md:py-32 px-4 bg-bg-primary">
       <div className="max-w-5xl mx-auto">
-        <AnimatedSection>
+        <AnimatedSection animation="blur-scale">
           <p className="text-accent-primary font-semibold text-sm tracking-[0.2em] uppercase text-center mb-3">
             Contacto
           </p>
@@ -20,7 +20,7 @@ export function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Map */}
-          <AnimatedSection delay={100}>
+          <AnimatedSection delay={100} animation="slide-right">
             <div className="rounded-2xl overflow-hidden shadow-lg aspect-square lg:aspect-auto lg:h-full min-h-[350px] bg-bg-secondary">
               <iframe
                 src={CONTACT.mapEmbed}
@@ -36,7 +36,7 @@ export function Contact() {
           </AnimatedSection>
 
           {/* Info */}
-          <AnimatedSection delay={200}>
+          <AnimatedSection delay={200} animation="slide-left">
             <div className="flex flex-col gap-5 justify-center h-full">
               <div className="glass p-6">
                 <div className="flex items-center gap-3 mb-2">

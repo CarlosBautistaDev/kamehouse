@@ -53,7 +53,7 @@ export function Pricing() {
         aria-hidden="true"
       />
       <div className="max-w-5xl mx-auto relative z-10">
-        <AnimatedSection>
+        <AnimatedSection animation="blur-scale">
           <p className="text-accent-primary font-semibold text-sm tracking-[0.2em] uppercase text-center mb-3">
             Planes
           </p>
@@ -66,14 +66,14 @@ export function Pricing() {
         </AnimatedSection>
 
         {/* Individual */}
-        <AnimatedSection delay={100}>
+        <AnimatedSection delay={100} animation="fade-up">
           <h3 className="font-heading text-2xl text-text-secondary text-center mb-8">
             ACTIVIDAD INDIVIDUAL
           </h3>
         </AnimatedSection>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {PRICING.individual.map((plan, index) => (
-            <AnimatedSection key={plan.period} delay={150 + index * 100}>
+            <AnimatedSection key={plan.period} delay={150 + index * 120} animation="scale">
               <PriceCard
                 price={plan.price}
                 period={plan.period}
@@ -86,21 +86,21 @@ export function Pricing() {
         </div>
 
         {/* Combo */}
-        <AnimatedSection delay={200}>
+        <AnimatedSection delay={200} animation="fade-up">
           <h3 className="font-heading text-2xl text-text-secondary text-center mb-8">
             COMBO — {PRICING.combo.title}
           </h3>
         </AnimatedSection>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
           {PRICING.combo.plans.map((plan, index) => (
-            <AnimatedSection key={plan.period} delay={250 + index * 100}>
+            <AnimatedSection key={plan.period} delay={250 + index * 120} animation="scale">
               <PriceCard price={plan.price} period={plan.period} />
             </AnimatedSection>
           ))}
         </div>
 
         {/* Taekwondo */}
-        <AnimatedSection delay={300}>
+        <AnimatedSection delay={300} animation="blur-up">
           <h3 className="font-heading text-2xl text-text-secondary text-center mb-8">
             TAEKWONDO
           </h3>
@@ -114,7 +114,7 @@ export function Pricing() {
         </AnimatedSection>
 
         {/* Payment Notice */}
-        <AnimatedSection delay={400}>
+        <AnimatedSection delay={400} animation="blur-up">
           <div className="rounded-2xl border border-accent-secondary/20 bg-accent-secondary/5 p-6 md:p-8 max-w-2xl mx-auto">
             <h4 className="font-heading text-xl text-accent-secondary mb-4">
               ⚠️ AVISO IMPORTANTE

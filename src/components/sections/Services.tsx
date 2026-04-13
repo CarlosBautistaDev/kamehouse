@@ -12,7 +12,7 @@ export function Services() {
   return (
     <section id="servicios" className="py-24 md:py-32 px-4 bg-bg-primary">
       <div className="max-w-6xl mx-auto">
-        <AnimatedSection>
+        <AnimatedSection animation="blur-scale">
           <p className="text-accent-primary font-semibold text-sm tracking-[0.2em] uppercase text-center mb-3">
             Disciplinas
           </p>
@@ -26,7 +26,7 @@ export function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {SERVICES.map((service, index) => (
-            <AnimatedSection key={service.id} delay={index * 150}>
+            <AnimatedSection key={service.id} delay={index * 150} animation="scale">
               <div className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer">
                 {/* Image */}
                 <Image
