@@ -62,7 +62,7 @@ export function Pricing() {
 
       {/* Esferas derecha — center-right, smaller */}
       <div
-        className="absolute -right-[5%] top-[30%] w-[50%] md:w-[35%] pointer-events-none"
+        className="absolute -right-[5%] top-[38%] w-[50%] md:w-[35%] pointer-events-none"
         style={{
           transform: `scale(${esferasDerScale}) translateY(${esferasDerY}px)`,
           transformOrigin: "right center",
