@@ -105,6 +105,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
+      suppressHydrationWarning
       className={`${bebasNeue.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
