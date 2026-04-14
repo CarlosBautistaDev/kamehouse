@@ -33,22 +33,21 @@ export function ShenglongStats() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Shenlong body: slow parallax (moves up slightly)
-  const shenglongY = -progress * 80;
-  // Left arm: faster parallax (moves up more) + slight horizontal
-  const brazoY = -progress * 140;
-  const brazoX = progress * 15;
+  // Shenlong body: slow parallax, very large
+  const shenglongY = -progress * 60;
+  // Right arm: faster parallax
+  const brazoY = -progress * 120;
 
   return (
     <section
       ref={sectionRef}
       className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden bg-black"
     >
-      {/* Shenlong full — center/right bg */}
+      {/* Shenlong full — massive, centered */}
       <div
-        className="absolute inset-0 pointer-events-none flex justify-center md:justify-end"
+        className="absolute inset-0 pointer-events-none flex items-center justify-center"
         style={{
-          transform: `translateY(${shenglongY}px)`,
+          transform: `translateY(${shenglongY}px) scale(2.8)`,
           willChange: "transform",
         }}
         aria-hidden="true"
@@ -56,16 +55,15 @@ export function ShenglongStats() {
         <img
           src="/images/shenglongfull.png"
           alt=""
-          className="h-[120%] w-auto object-contain opacity-20 md:opacity-25 max-w-none"
-          style={{ marginRight: "-5%" }}
+          className="h-full w-auto object-contain opacity-15 md:opacity-20 max-w-none"
         />
       </div>
 
-      {/* Brazo izquierdo — left side, overlapping, faster parallax */}
+      {/* Brazo — RIGHT side, flush to edge, overlapping content */}
       <div
-        className="absolute left-0 top-0 bottom-0 pointer-events-none z-20"
+        className="absolute right-0 top-0 bottom-0 pointer-events-none z-20 flex items-center justify-end"
         style={{
-          transform: `translateY(${brazoY}px) translateX(${brazoX}px)`,
+          transform: `translateY(${brazoY}px)`,
           willChange: "transform",
         }}
         aria-hidden="true"
@@ -73,7 +71,7 @@ export function ShenglongStats() {
         <img
           src="/images/brazo-izq.png"
           alt=""
-          className="h-[80%] md:h-[90%] w-auto object-contain opacity-40 md:opacity-50 -translate-x-[15%] mt-[10%]"
+          className="h-[70%] md:h-[85%] w-auto object-contain opacity-50 md:opacity-60 translate-x-[20%]"
         />
       </div>
 

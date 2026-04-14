@@ -33,23 +33,22 @@ export function Pricing() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Esferas izquierda: scale más rápido, mueve hacia la izquierda
-  const esferasIzqScale = isMobile ? 0.5 + progress * 2.5 : 0.7 + progress * 2.0;
-  const esferasIzqY = -progress * 80;
-  const esferasIzqX = -progress * 30;
+  // Esferas izquierda: arriba, detrás de las primeras cards, crece mucho
+  const esferasIzqScale = isMobile ? 0.6 + progress * 4.0 : 0.8 + progress * 3.5;
+  const esferasIzqY = -progress * 40;
 
-  // Esferas derecha: scale más lento, mueve hacia la derecha
-  const esferasDerScale = isMobile ? 0.4 + progress * 3.0 : 0.6 + progress * 2.4;
-  const esferasDerY = -progress * 50;
-  const esferasDerX = progress * 25;
+  // Esferas derecha: abajo, crece mucho
+  const esferasDerScale = isMobile ? 0.5 + progress * 4.5 : 0.7 + progress * 4.0;
+  const esferasDerY = progress * 30;
 
   return (
     <section ref={sectionRef} id="precios" className="relative py-24 md:py-32 px-4 bg-bg-primary overflow-hidden">
-      {/* Esferas izquierda — parallax */}
+      {/* Esferas izquierda — top-left, behind first 3 cards */}
       <div
-        className="absolute top-0 left-0 w-1/2 h-full pointer-events-none"
+        className="absolute -left-[10%] top-[5%] w-[60%] md:w-[45%] pointer-events-none"
         style={{
-          transform: `scale(${esferasIzqScale}) translate(${esferasIzqX}px, ${esferasIzqY}px)`,
+          transform: `scale(${esferasIzqScale}) translateY(${esferasIzqY}px)`,
+          transformOrigin: "left top",
           willChange: "transform",
         }}
         aria-hidden="true"
@@ -57,15 +56,16 @@ export function Pricing() {
         <img
           src="/images/esferasizquierda.png"
           alt=""
-          className="w-full h-full object-contain object-left opacity-60"
+          className="w-full h-auto object-contain opacity-50"
         />
       </div>
 
-      {/* Esferas derecha — parallax más lento */}
+      {/* Esferas derecha — bottom-right, grows big */}
       <div
-        className="absolute top-0 right-0 w-1/2 h-full pointer-events-none"
+        className="absolute -right-[10%] bottom-[10%] w-[60%] md:w-[45%] pointer-events-none"
         style={{
-          transform: `scale(${esferasDerScale}) translate(${esferasDerX}px, ${esferasDerY}px)`,
+          transform: `scale(${esferasDerScale}) translateY(${esferasDerY}px)`,
+          transformOrigin: "right bottom",
           willChange: "transform",
         }}
         aria-hidden="true"
@@ -73,7 +73,7 @@ export function Pricing() {
         <img
           src="/images/esferasderecha.png"
           alt=""
-          className="w-full h-full object-contain object-right opacity-60"
+          className="w-full h-auto object-contain opacity-50"
         />
       </div>
       <div className="max-w-5xl mx-auto relative z-10">
