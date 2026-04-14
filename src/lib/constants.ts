@@ -99,7 +99,7 @@ export const PRICING = {
       period: "mes",
       highlighted: true,
       badge: "Mejor Valor",
-      features: ["1 actividad", "Lunes a sábado", "Ahorra $100 al mes", "Horarios flexibles"],
+      features: ["1 actividad", "Lunes a sábado", "Sin preocupaciones", "Horarios flexibles"],
     },
     {
       price: "$100",
@@ -120,7 +120,7 @@ export const PRICING = {
       {
         price: "$1,500",
         period: "mes",
-        features: ["2 actividades", "Lunes a sábado", "Ahorra vs semanal", "Horarios flexibles"],
+        features: ["2 actividades", "Lunes a sábado", "Mejor precio", "Horarios flexibles"],
       },
     ],
   },
