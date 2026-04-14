@@ -88,30 +88,46 @@ export const TKD_SCHEDULE = {
 // ===== PRECIOS =====
 export const PRICING = {
   individual: [
-    { price: "$300", period: "semana", highlighted: false },
+    {
+      price: "$300",
+      period: "semana",
+      highlighted: false,
+      features: ["1 actividad", "Lunes a sábado", "Horarios flexibles"],
+    },
     {
       price: "$1,200",
       period: "mes",
       highlighted: true,
       badge: "Mejor Valor",
+      features: ["1 actividad", "Lunes a sábado", "Ahorra $100 al mes", "Horarios flexibles"],
     },
     {
       price: "$100",
       period: "día",
       highlighted: false,
       description: "Visita única",
+      features: ["1 actividad", "1 sesión", "Sin compromiso"],
     },
   ],
   combo: {
     title: "2 Actividades",
     plans: [
-      { price: "$450", period: "semana" },
-      { price: "$1,500", period: "mes" },
+      {
+        price: "$450",
+        period: "semana",
+        features: ["2 actividades", "Lunes a sábado", "Horarios flexibles"],
+      },
+      {
+        price: "$1,500",
+        period: "mes",
+        features: ["2 actividades", "Lunes a sábado", "Ahorra vs semanal", "Horarios flexibles"],
+      },
     ],
   },
   taekwondo: {
     price: "$450",
     period: "mes",
+    features: ["Niños, jóvenes y adultos", "Lunes a viernes", "Todos los niveles"],
   },
 } as const;
 

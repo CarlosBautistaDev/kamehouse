@@ -6,15 +6,21 @@ import Image from "next/image";
 export function Hero() {
   const [mounted, setMounted] = useState(false);
   const [logoVisible, setLogoVisible] = useState(true);
+  const [videoRevealed, setVideoRevealed] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     requestAnimationFrame(() => setMounted(true));
 
     // Logo stays 2s after appearing (~1.2s intro + 2s visible), then fades out
-    const timer = setTimeout(() => setLogoVisible(false), 3200);
+    const t1 = setTimeout(() => setLogoVisible(false), 3200);
+    // Video brightens AFTER logo is fully gone (3200 + 2500 fade = 5700)
+    const t2 = setTimeout(() => setVideoRevealed(true), 5700);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, []);
 
   // Re-show logo when user scrolls back to top
@@ -23,14 +29,18 @@ export function Hero() {
     const handleScroll = () => {
       if (window.scrollY < 100) {
         setLogoVisible(true);
-        setTimeout(() => setLogoVisible(false), 3200);
+        setVideoRevealed(false);
+        const t1 = setTimeout(() => setLogoVisible(false), 3200);
+        const t2 = setTimeout(() => setVideoRevealed(true), 5700);
+        return () => {
+          clearTimeout(t1);
+          clearTimeout(t2);
+        };
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [logoVisible]);
-
-  const revealed = mounted && !logoVisible;
 
   return (
     <section
@@ -47,7 +57,7 @@ export function Hero() {
         preload="auto"
         className="absolute inset-0 w-full h-full object-cover md:hidden"
         style={{
-          filter: revealed
+          filter: videoRevealed
             ? "grayscale(100%) brightness(0.55)"
             : "grayscale(100%) brightness(0.25)",
           objectPosition: "center center",
@@ -71,7 +81,7 @@ export function Hero() {
       <div
         className="absolute inset-0 z-[1]"
         style={{
-          background: revealed
+          background: videoRevealed
             ? "linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.08) 40%, rgba(0,0,0,0.3) 75%, #0C0C0C 100%)"
             : "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.6) 75%, #0C0C0C 100%)",
           transition: "background 2.5s ease-in-out",
@@ -120,8 +130,8 @@ export function Hero() {
       <div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
         style={{
-          opacity: revealed ? 1 : 0,
-          transform: revealed ? "translateY(0)" : "translateY(10px)",
+          opacity: videoRevealed ? 1 : 0,
+          transform: videoRevealed ? "translateY(0)" : "translateY(10px)",
           transition: "all 1s ease-out 0.5s",
         }}
       >
