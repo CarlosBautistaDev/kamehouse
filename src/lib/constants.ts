@@ -125,8 +125,8 @@ export const PAYMENT_NOTICE = {
     "Si pagas tu semana y comienzas martes o miércoles, los días anteriores se pierden. No son acumulables bajo ningún motivo.",
 } as const;
 
-// ===== PRÓXIMAMENTE =====
-export const COMING_SOON = [
+// ===== INCLUYE FUNCIONAL =====
+export const FUNCTIONAL_INCLUDES = [
   { name: "CrossFit", emoji: "🏋️" },
   { name: "Calistenia", emoji: "🤸" },
   { name: "Gym", emoji: "🏋️‍♂️" },
@@ -134,15 +134,31 @@ export const COMING_SOON = [
   { name: "HYROX", emoji: "🔥" },
 ] as const;
 
+// ===== HORARIOS KICKBOXING =====
+export const KICKBOXING_SCHEDULE = {
+  weekdays: {
+    label: "Lunes a Jueves",
+    slots: [
+      { time: "5:00 - 6:00 pm", period: "evening" as const },
+      { time: "7:00 - 8:00 pm", period: "evening" as const },
+    ],
+  },
+  professors: [
+    { name: "Profesor Alan", schedule: "Lunes a Jueves" },
+  ],
+} as const;
+
 // ===== CONTACTO =====
 export const CONTACT = {
   whatsapp: "5215564603210",
   phone: "+52 55 6460 3210",
   instagram: "https://www.instagram.com/kamehouse_19",
   instagramHandle: "@kamehouse_19",
-  address: "DIRECCIÓN DEL GYM", // REEMPLAZAR
-  mapUrl: "https://maps.google.com/?q=...", // REEMPLAZAR
-  mapEmbed: "https://www.google.com/maps/embed?pb=...", // REEMPLAZAR URL de embed
+  facebook: "https://www.facebook.com/share/1AtbTqrnBo/",
+  facebookHandle: "Kame House Training",
+  address: "Leopoldo Blackaller 150, San Pedro Xalpa, Azcapotzalco, 02719 Ciudad de México, CDMX",
+  mapUrl: "https://maps.google.com/?q=19.4799353,-99.2180856",
+  mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1881.2!2d-99.2180856!3d19.4799353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f99ab71753e7%3A0x0!2zMTnCsDI4JzQ3LjgiTiA5OcKwMTMnMDUuMSJX!5e0!3m2!1ses!2smx!4v1",
 } as const;
 
 // ===== NAV SECTIONS =====

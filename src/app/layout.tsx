@@ -71,13 +71,13 @@ const jsonLd = {
   description: "Gym de entrenamiento funcional, box y taekwondo.",
   url: "https://kamehousetraining.com",
   image: "https://kamehousetraining.com/images/og-image.jpg",
-  telephone: "+52XXXXXXXXXX",
+  telephone: "+52 55 6460 3210",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "DIRECCIÓN DEL GYM",
-    addressLocality: "CIUDAD",
-    addressRegion: "ESTADO",
-    postalCode: "CP",
+    streetAddress: "Leopoldo Blackaller 150",
+    addressLocality: "Azcapotzalco",
+    addressRegion: "Ciudad de México",
+    postalCode: "02719",
     addressCountry: "MX",
   },
   openingHoursSpecification: [

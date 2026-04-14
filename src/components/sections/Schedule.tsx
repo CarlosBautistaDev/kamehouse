@@ -7,6 +7,7 @@ import {
   BOX_SCHEDULE,
   FUNCTIONAL_SCHEDULE,
   TKD_SCHEDULE,
+  KICKBOXING_SCHEDULE,
 } from "@/lib/constants";
 
 function ScheduleSlot({
@@ -103,7 +104,7 @@ function FunctionalTab() {
 
       <div className="glass px-5 py-3.5 text-center">
         <p className="text-accent-primary font-semibold text-sm">
-          🔥 Próximamente: CrossFit, Calistenia, Gym, HYROX
+          🔥 Incluye: CrossFit, Calistenia, Gym, HYROX
         </p>
       </div>
     </div>
@@ -144,9 +145,43 @@ function TkdTab() {
   );
 }
 
+function KickboxingTab() {
+  return (
+    <div className="space-y-6">
+      <div className="glass p-0 overflow-hidden">
+        <div className="px-5 py-3.5 bg-black/[0.02] border-b border-black/5">
+          <h4 className="font-heading text-xl text-text-primary">
+            {KICKBOXING_SCHEDULE.weekdays.label}
+          </h4>
+        </div>
+        {KICKBOXING_SCHEDULE.weekdays.slots.map((slot) => (
+          <ScheduleSlot key={slot.time} {...slot} />
+        ))}
+      </div>
+
+      <div className="flex flex-wrap gap-4">
+        {KICKBOXING_SCHEDULE.professors.map((prof) => (
+          <div
+            key={prof.name}
+            className="glass px-5 py-3.5 flex items-center gap-3"
+          >
+            <div className="w-10 h-10 rounded-full bg-accent-primary/10 flex items-center justify-center">
+              <span className="text-accent-primary text-lg">🥊</span>
+            </div>
+            <div>
+              <p className="text-text-primary text-sm font-semibold">{prof.name}</p>
+              <p className="text-text-tertiary text-xs">{prof.schedule}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function Schedule() {
   const [activeTab, setActiveTab] = useState(0);
-  const tabs = ["🥊 Box", "💪 Funcional", "🥋 Taekwondo"];
+  const tabs = ["🥊 Box", "💪 Funcional", "🥋 Taekwondo", "🦵 KickBoxing"];
 
   return (
     <section id="horarios" className="py-24 md:py-32 px-4 bg-bg-secondary">
@@ -177,6 +212,7 @@ export function Schedule() {
           {activeTab === 0 && <BoxTab />}
           {activeTab === 1 && <FunctionalTab />}
           {activeTab === 2 && <TkdTab />}
+          {activeTab === 3 && <KickboxingTab />}
         </AnimatedSection>
       </div>
     </section>

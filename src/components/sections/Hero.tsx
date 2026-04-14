@@ -4,38 +4,40 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
 export function Hero() {
-  const [logoVisible, setLogoVisible] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const [logoVisible, setLogoVisible] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    setMounted(true);
+    requestAnimationFrame(() => setMounted(true));
 
-    // Fade out logo after 4 seconds
-    const timer = setTimeout(() => setLogoVisible(false), 4000);
+    // Logo stays 2s after appearing (~1.2s intro + 2s visible), then fades out
+    const timer = setTimeout(() => setLogoVisible(false), 3200);
 
-    return () => {
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   // Re-show logo when user scrolls back to top
   useEffect(() => {
+    if (logoVisible) return;
     const handleScroll = () => {
       if (window.scrollY < 100) {
         setLogoVisible(true);
+        setTimeout(() => setLogoVisible(false), 3200);
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [logoVisible]);
+
+  const revealed = mounted && !logoVisible;
 
   return (
     <section
       id="inicio"
       className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Video background — mobile only, wider crop */}
+      {/* Video background — mobile only */}
       <video
         ref={videoRef}
         autoPlay
@@ -45,11 +47,12 @@ export function Hero() {
         preload="auto"
         className="absolute inset-0 w-full h-full object-cover md:hidden"
         style={{
-          filter: "grayscale(100%) brightness(0.4)",
+          filter: revealed
+            ? "grayscale(100%) brightness(0.55)"
+            : "grayscale(100%) brightness(0.25)",
           objectPosition: "center center",
           transform: "scale(1.15)",
-          transition: "filter 2s ease-in-out",
-          ...(mounted && !logoVisible ? { filter: "grayscale(100%) brightness(0.55)" } : {}),
+          transition: "filter 2.5s ease-in-out",
         }}
       >
         <source src="/images/bg-video-web.mp4" type="video/mp4" />
@@ -68,9 +71,9 @@ export function Hero() {
       <div
         className="absolute inset-0 z-[1]"
         style={{
-          background: mounted && !logoVisible
-            ? "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.3) 70%, #0C0C0C 100%)"
-            : "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.5) 70%, #0C0C0C 100%)",
+          background: revealed
+            ? "linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.08) 40%, rgba(0,0,0,0.3) 75%, #0C0C0C 100%)"
+            : "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.6) 75%, #0C0C0C 100%)",
           transition: "background 2.5s ease-in-out",
         }}
       />
@@ -83,38 +86,43 @@ export function Hero() {
         }}
       />
 
-      {/* Content — Logo only */}
-      <div className="relative z-10 flex items-center justify-center w-full px-4">
-        <div
-          className="transition-all duration-[2s] ease-out"
-          style={{
-            opacity: mounted ? (logoVisible ? 1 : 0) : 0,
-            transform: mounted
-              ? logoVisible
-                ? "translateY(0) scale(1)"
-                : "translateY(-30px) scale(0.95)"
-              : "translateY(30px) scale(0.9)",
-            filter: mounted ? "blur(0px)" : "blur(12px)",
-            transition: "opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s cubic-bezier(0.16, 1, 0.3, 1)",
-          }}
-        >
-          <Image
-            src="/images/kh-logo.png"
-            alt="Kame House Training"
-            width={500}
-            height={500}
-            priority
-            className="w-52 sm:w-64 md:w-80 lg:w-96 h-auto drop-shadow-2xl"
-          />
-        </div>
+      {/* Logo — blur in, stay, fade out in place */}
+      <div
+        className="relative z-10 flex items-center justify-center w-full px-4"
+        style={{
+          opacity: !mounted ? 0 : logoVisible ? 1 : 0,
+          transform: !mounted
+            ? "translateY(30px) scale(0.9)"
+            : "translateY(0) scale(1)",
+          filter: !mounted
+            ? "blur(12px)"
+            : logoVisible
+              ? "blur(0px)"
+              : "blur(12px)",
+          transition: !mounted
+            ? "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s cubic-bezier(0.16, 1, 0.3, 1)"
+            : logoVisible
+              ? "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s cubic-bezier(0.16, 1, 0.3, 1)"
+              : "opacity 2.5s ease-in-out, filter 2.5s ease-in-out",
+        }}
+      >
+        <Image
+          src="/images/favicon_io/kh-logo-removedbg.png"
+          alt="Kame House Training"
+          width={500}
+          height={500}
+          priority
+          className="w-52 sm:w-64 md:w-80 lg:w-96 h-auto"
+        />
       </div>
 
-      {/* Scroll indicator — appears when logo fades */}
+      {/* Scroll indicator — appears after logo fades */}
       <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 transition-all duration-700"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
         style={{
-          opacity: mounted && !logoVisible ? 1 : 0.6,
-          transform: mounted && !logoVisible ? "translateY(0)" : "translateY(10px)",
+          opacity: revealed ? 1 : 0,
+          transform: revealed ? "translateY(0)" : "translateY(10px)",
+          transition: "all 1s ease-out 0.5s",
         }}
       >
         <div className="animate-scroll-hint">
