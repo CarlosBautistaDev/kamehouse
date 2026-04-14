@@ -37,9 +37,9 @@ export function Pricing() {
   const esferasIzqScale = isMobile ? 0.6 + progress * 4.0 : 0.8 + progress * 3.5;
   const esferasIzqY = -progress * 40;
 
-  // Esferas derecha: abajo, crece hasta ~3x
-  const esferasDerScale = isMobile ? 0.5 + progress * 2.5 : 0.7 + progress * 2.3;
-  const esferasDerY = progress * 30;
+  // Esferas derecha: centro, más pequeña 0.5→2.3x
+  const esferasDerScale = isMobile ? 0.4 + progress * 1.8 : 0.5 + progress * 1.8;
+  const esferasDerY = -progress * 20;
 
   return (
     <section ref={sectionRef} id="precios" className="relative py-24 md:py-32 px-4 bg-bg-primary overflow-hidden">
@@ -60,12 +60,12 @@ export function Pricing() {
         />
       </div>
 
-      {/* Esferas derecha — bottom-right, grows big */}
+      {/* Esferas derecha — center-right, smaller */}
       <div
-        className="absolute -right-[10%] bottom-[10%] w-[60%] md:w-[45%] pointer-events-none"
+        className="absolute -right-[5%] top-[30%] w-[50%] md:w-[35%] pointer-events-none"
         style={{
           transform: `scale(${esferasDerScale}) translateY(${esferasDerY}px)`,
-          transformOrigin: "right bottom",
+          transformOrigin: "right center",
           willChange: "transform",
         }}
         aria-hidden="true"
