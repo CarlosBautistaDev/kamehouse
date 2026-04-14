@@ -117,12 +117,15 @@ export function Hero() {
       >
         <Image
           src="/images/favicon_io/kh-logo-removedbg.png"
-          alt="Kame House Training"
+          alt="Kame House Training — Gym en Azcapotzalco, CDMX"
           width={500}
           height={500}
           priority
           className="w-52 sm:w-64 md:w-80 lg:w-96 h-auto"
         />
+        <h1 className="sr-only">
+          Kame House Training — Gym de Box, Entrenamiento Funcional, Taekwondo y Kickboxing en Azcapotzalco, Ciudad de México
+        </h1>
       </div>
 
       {/* Scroll indicator — appears after logo fades */}

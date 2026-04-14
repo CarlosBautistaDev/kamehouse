@@ -15,34 +15,49 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kamehousetraining.com"),
-  title: "Kame House Training | Entrenamiento Funcional, Box y Taekwondo",
+  title: {
+    default: "Kame House Training | Gym en Azcapotzalco CDMX — Box, Funcional y Taekwondo",
+    template: "%s | Kame House Training",
+  },
   description:
-    "Gym de entrenamiento funcional, box y taekwondo. CrossFit, Calistenia, HYROX y más. Horarios flexibles desde $300/semana. ¡Inscríbete hoy!",
+    "Gym en Azcapotzalco, CDMX. Clases de box, entrenamiento funcional, taekwondo y kickboxing. CrossFit, Calistenia, HYROX. Horarios de lunes a sábado desde $100/día. ¡Inscríbete hoy!",
   keywords: [
-    "gym",
-    "entrenamiento funcional",
-    "box",
-    "taekwondo",
-    "crossfit",
-    "calistenia",
-    "HYROX",
+    "gym Azcapotzalco",
+    "gym CDMX",
+    "clases de box CDMX",
+    "clases de box Azcapotzalco",
+    "entrenamiento funcional CDMX",
+    "entrenamiento funcional Azcapotzalco",
+    "taekwondo CDMX",
+    "taekwondo Azcapotzalco",
+    "kickboxing CDMX",
+    "crossfit CDMX",
+    "calistenia CDMX",
+    "HYROX México",
     "Kame House Training",
-    "clases de box",
-    "clases de taekwondo",
+    "gym barato CDMX",
+    "clases de taekwondo niños CDMX",
+    "gimnasio Azcapotzalco",
   ],
   authors: [{ name: "Kame House Training" }],
+  creator: "Kame House Training",
+  publisher: "Kame House Training",
+  formatDetection: {
+    telephone: true,
+    address: true,
+  },
   openGraph: {
-    title: "Kame House Training | Entrenamiento Funcional, Box y Taekwondo",
+    title: "Kame House Training | Gym en Azcapotzalco — Box, Funcional, Taekwondo",
     description:
-      "Gym de entrenamiento funcional, box y taekwondo. Horarios flexibles desde $300/semana.",
+      "Gym en Azcapotzalco, CDMX. Box, funcional, taekwondo y kickboxing. Desde $100/día. Horarios de lunes a sábado.",
     url: "https://kamehousetraining.com",
     siteName: "Kame House Training",
     images: [
       {
-        url: "/images/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Kame House Training — Entrenamiento Funcional, Box, Taekwondo",
+        url: "/images/kh-logo.png",
+        width: 800,
+        height: 800,
+        alt: "Kame House Training — Gym en Azcapotzalco, CDMX",
       },
     ],
     locale: "es_MX",
@@ -50,28 +65,40 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kame House Training",
+    title: "Kame House Training | Gym en Azcapotzalco CDMX",
     description:
-      "Entrenamiento Funcional, Box y Taekwondo. Desde $300/semana.",
-    images: ["/images/og-image.jpg"],
+      "Box, Entrenamiento Funcional, Taekwondo y Kickboxing. Desde $100/día.",
+    images: ["/images/kh-logo.png"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   alternates: {
     canonical: "https://kamehousetraining.com",
+  },
+  verification: {
+    // Agregar cuando se tenga: google: "TU_CODIGO_DE_VERIFICACION",
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SportsActivityLocation",
+  "@id": "https://kamehousetraining.com/#gym",
   name: "Kame House Training",
-  description: "Gym de entrenamiento funcional, box y taekwondo.",
+  description: "Gym de entrenamiento funcional, box, taekwondo y kickboxing en Azcapotzalco, Ciudad de México. CrossFit, Calistenia, HYROX y más.",
   url: "https://kamehousetraining.com",
-  image: "https://kamehousetraining.com/images/og-image.jpg",
-  telephone: "+52 55 6460 3210",
+  image: "https://kamehousetraining.com/images/kh-logo.png",
+  logo: "https://kamehousetraining.com/images/kh-logo.png",
+  telephone: "+525564603210",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Leopoldo Blackaller 150",
@@ -80,6 +107,19 @@ const jsonLd = {
     postalCode: "02719",
     addressCountry: "MX",
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 19.4869,
+    longitude: -99.1840,
+  },
+  areaServed: {
+    "@type": "City",
+    name: "Ciudad de México",
+  },
+  sameAs: [
+    "https://www.instagram.com/kamehouse_19",
+    "https://www.facebook.com/profile.php?id=61575310498498",
+  ],
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -95,6 +135,49 @@ const jsonLd = {
     },
   ],
   priceRange: "$100 - $1,500 MXN",
+  currenciesAccepted: "MXN",
+  paymentAccepted: "Cash, Bank Transfer",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Planes de entrenamiento",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        name: "Actividad Individual — Día",
+        price: "100",
+        priceCurrency: "MXN",
+        description: "Visita única, 1 actividad, 1 sesión",
+      },
+      {
+        "@type": "Offer",
+        name: "Actividad Individual — Semana",
+        price: "300",
+        priceCurrency: "MXN",
+        description: "1 actividad, lunes a sábado",
+      },
+      {
+        "@type": "Offer",
+        name: "Actividad Individual — Mes",
+        price: "1200",
+        priceCurrency: "MXN",
+        description: "1 actividad, lunes a sábado, horarios flexibles",
+      },
+      {
+        "@type": "Offer",
+        name: "Combo 2 Actividades — Mes",
+        price: "1500",
+        priceCurrency: "MXN",
+        description: "2 actividades, lunes a sábado",
+      },
+      {
+        "@type": "Offer",
+        name: "Taekwondo — Mes",
+        price: "450",
+        priceCurrency: "MXN",
+        description: "Niños, jóvenes y adultos, todos los niveles",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
