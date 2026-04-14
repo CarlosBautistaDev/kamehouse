@@ -62,7 +62,7 @@ export function Hero() {
             : "grayscale(100%) brightness(0.25)",
           objectPosition: "center center",
           transform: "scale(1.15)",
-          transition: "filter 2.5s ease-in-out",
+          transition: "filter 3.5s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
         <source src="/images/bg-video-web.mp4" type="video/mp4" />
@@ -77,14 +77,13 @@ export function Hero() {
       {/* Fallback dark bg */}
       <div className="absolute inset-0 bg-bg-dark -z-10" />
 
-      {/* Gradient overlay — lightens when logo fades */}
+      {/* Gradient overlay — fades out smoothly when video reveals */}
       <div
         className="absolute inset-0 z-[1]"
         style={{
-          background: videoRevealed
-            ? "linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.08) 40%, rgba(0,0,0,0.3) 75%, #0C0C0C 100%)"
-            : "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.6) 75%, #0C0C0C 100%)",
-          transition: "background 2.5s ease-in-out",
+          background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.6) 75%, #0C0C0C 100%)",
+          opacity: videoRevealed ? 0.4 : 1,
+          transition: "opacity 3.5s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       />
 
