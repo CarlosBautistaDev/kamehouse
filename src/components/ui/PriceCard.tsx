@@ -23,7 +23,7 @@ export function PriceCard({
     ? "relative py-8 px-5 text-center rounded-3xl transition-all duration-300 hover:-translate-y-1 bg-accent-primary text-white shadow-xl shadow-accent-primary/20 scale-[1.02]"
     : isLight
       ? "relative py-8 px-5 text-center rounded-3xl transition-all duration-300 hover:-translate-y-1 bg-white shadow-lg"
-      : "relative py-8 px-5 text-center rounded-3xl transition-all duration-300 hover:-translate-y-1 bg-white/[0.06] border border-white/10";
+      : "relative py-8 px-5 text-center rounded-3xl transition-all duration-300 hover:-translate-y-1 bg-white/[0.08] backdrop-blur-xl border border-white/[0.12]";
 
   const priceColor = highlighted ? "text-white" : isLight ? "text-gray-900" : "text-text-primary";
   const periodColor = highlighted ? "text-white/80" : isLight ? "text-gray-500" : "text-text-secondary";

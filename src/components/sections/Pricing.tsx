@@ -33,25 +33,49 @@ export function Pricing() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Mobile: 0.4x → 3.5x, Desktop: 0.6x → 3x
-  const esferasScale = isMobile ? 0.4 + progress * 3.1 : 0.6 + progress * 2.4;
-  const esferasY = -progress * 60;
+  // Esferas izquierda: scale más rápido, mueve hacia la izquierda
+  const esferasIzqScale = isMobile ? 0.5 + progress * 2.5 : 0.7 + progress * 2.0;
+  const esferasIzqY = -progress * 80;
+  const esferasIzqX = -progress * 30;
+
+  // Esferas derecha: scale más lento, mueve hacia la derecha
+  const esferasDerScale = isMobile ? 0.4 + progress * 3.0 : 0.6 + progress * 2.4;
+  const esferasDerY = -progress * 50;
+  const esferasDerX = progress * 25;
 
   return (
     <section ref={sectionRef} id="precios" className="relative py-24 md:py-32 px-4 bg-bg-primary overflow-hidden">
-      {/* Dragon Balls parallax background — zoom on scroll */}
+      {/* Esferas izquierda — parallax */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute top-0 left-0 w-1/2 h-full pointer-events-none"
         style={{
-          backgroundImage: "url(/images/esferas-dragon.png)",
-          backgroundSize: "clamp(280px, 50vw, 500px)",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          transform: `scale(${esferasScale}) translateY(${esferasY}px)`,
+          transform: `scale(${esferasIzqScale}) translate(${esferasIzqX}px, ${esferasIzqY}px)`,
           willChange: "transform",
         }}
         aria-hidden="true"
-      />
+      >
+        <img
+          src="/images/esferasizquierda.png"
+          alt=""
+          className="w-full h-full object-contain object-left opacity-60"
+        />
+      </div>
+
+      {/* Esferas derecha — parallax más lento */}
+      <div
+        className="absolute top-0 right-0 w-1/2 h-full pointer-events-none"
+        style={{
+          transform: `scale(${esferasDerScale}) translate(${esferasDerX}px, ${esferasDerY}px)`,
+          willChange: "transform",
+        }}
+        aria-hidden="true"
+      >
+        <img
+          src="/images/esferasderecha.png"
+          alt=""
+          className="w-full h-full object-contain object-right opacity-60"
+        />
+      </div>
       <div className="max-w-5xl mx-auto relative z-10">
         <AnimatedSection animation="blur-scale">
           <p className="text-accent-primary font-semibold text-sm tracking-[0.2em] uppercase text-center mb-3">

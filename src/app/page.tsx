@@ -5,6 +5,7 @@ import { Pricing } from "@/components/sections/Pricing";
 import { ComingSoon } from "@/components/sections/ComingSoon";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
+import { ShenglongStats } from "@/components/sections/ShenglongStats";
 import { ParallaxSection } from "@/components/ui/ParallaxSection";
 import { Button } from "@/components/ui/Button";
 import { CONTACT } from "@/lib/constants";
@@ -16,29 +17,8 @@ export default function Home() {
       <Hero />
       <Services />
 
-      {/* Parallax divider — Stats */}
-      <ParallaxSection
-        imageSrc="/images/parallax-1.jpg"
-        imageAlt="Interior del gimnasio Kame House Training"
-        overlay="gradient"
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="grid grid-cols-3 gap-4 md:gap-8">
-            <div>
-              <p className="font-heading text-4xl md:text-6xl text-white">3</p>
-              <p className="text-white/60 text-xs md:text-sm mt-1">Disciplinas</p>
-            </div>
-            <div>
-              <p className="font-heading text-4xl md:text-6xl text-accent-primary">7+</p>
-              <p className="text-white/60 text-xs md:text-sm mt-1">Horarios diarios</p>
-            </div>
-            <div>
-              <p className="font-heading text-4xl md:text-6xl text-white">$100</p>
-              <p className="text-white/60 text-xs md:text-sm mt-1">Desde / día</p>
-            </div>
-          </div>
-        </div>
-      </ParallaxSection>
+      {/* Shenlong Stats — parallax dragon */}
+      <ShenglongStats />
 
       <Schedule />
       <Pricing />
