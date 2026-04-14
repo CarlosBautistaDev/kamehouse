@@ -37,8 +37,8 @@ export function Pricing() {
   const esferasIzqScale = isMobile ? 0.6 + progress * 4.0 : 0.8 + progress * 3.5;
   const esferasIzqY = -progress * 40;
 
-  // Esferas derecha: abajo, crece mucho
-  const esferasDerScale = isMobile ? 0.5 + progress * 4.5 : 0.7 + progress * 4.0;
+  // Esferas derecha: abajo, crece hasta ~3x
+  const esferasDerScale = isMobile ? 0.5 + progress * 2.5 : 0.7 + progress * 2.3;
   const esferasDerY = progress * 30;
 
   return (

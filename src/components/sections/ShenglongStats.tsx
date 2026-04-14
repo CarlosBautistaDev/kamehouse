@@ -33,21 +33,23 @@ export function ShenglongStats() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Shenlong body: slow parallax, very large
-  const shenglongY = -progress * 60;
-  // Right arm: faster parallax
-  const brazoY = -progress * 120;
+  // Shenlong body: parallax — scale grows + moves up
+  const shenglongScale = 2.6 + progress * 0.6;
+  const shenglongY = -progress * 80;
+  // Brazo: faster parallax — moves up more + slight scale
+  const brazoScale = 1.0 + progress * 0.3;
+  const brazoY = -progress * 150;
 
   return (
     <section
       ref={sectionRef}
       className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden bg-black"
     >
-      {/* Shenlong full — massive, centered */}
+      {/* Shenlong full — massive, parallax scale + translate */}
       <div
         className="absolute inset-0 pointer-events-none flex items-center justify-center"
         style={{
-          transform: `translateY(${shenglongY}px) scale(2.8)`,
+          transform: `translateY(${shenglongY}px) scale(${shenglongScale})`,
           willChange: "transform",
         }}
         aria-hidden="true"
@@ -59,11 +61,12 @@ export function ShenglongStats() {
         />
       </div>
 
-      {/* Brazo — RIGHT side, flush to edge, overlapping content */}
+      {/* Brazo — RIGHT side, bigger, parallax scale + translate */}
       <div
         className="absolute right-0 top-0 bottom-0 pointer-events-none z-20 flex items-center justify-end"
         style={{
-          transform: `translateY(${brazoY}px)`,
+          transform: `translateY(${brazoY}px) scale(${brazoScale})`,
+          transformOrigin: "right center",
           willChange: "transform",
         }}
         aria-hidden="true"
@@ -71,7 +74,7 @@ export function ShenglongStats() {
         <img
           src="/images/brazo-izq.png"
           alt=""
-          className="h-[70%] md:h-[85%] w-auto object-contain opacity-50 md:opacity-60 translate-x-[20%]"
+          className="h-[90%] md:h-[110%] w-auto object-contain opacity-50 md:opacity-60 translate-x-[15%]"
         />
       </div>
 
