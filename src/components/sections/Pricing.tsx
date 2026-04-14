@@ -71,7 +71,7 @@ export function Pricing() {
             ACTIVIDAD INDIVIDUAL
           </h3>
         </AnimatedSection>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto mb-16">
           {PRICING.individual.map((plan, index) => (
             <AnimatedSection key={plan.period} delay={150 + index * 120} animation="scale">
               <PriceCard
@@ -91,7 +91,7 @@ export function Pricing() {
             COMBO — {PRICING.combo.title}
           </h3>
         </AnimatedSection>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
+        <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto mb-16">
           {PRICING.combo.plans.map((plan, index) => (
             <AnimatedSection key={plan.period} delay={250 + index * 120} animation="scale">
               <PriceCard price={plan.price} period={plan.period} />
@@ -104,7 +104,7 @@ export function Pricing() {
           <h3 className="font-heading text-2xl text-text-secondary text-center mb-8">
             TAEKWONDO
           </h3>
-          <div className="max-w-xs mx-auto mb-16">
+          <div className="max-w-[180px] mx-auto mb-16">
             <PriceCard
               price={PRICING.taekwondo.price}
               period={PRICING.taekwondo.period}
