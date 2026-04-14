@@ -14,8 +14,8 @@ export function Hero() {
 
     // Logo stays 2s after appearing (~1.2s intro + 2s visible), then fades out
     const t1 = setTimeout(() => setLogoVisible(false), 3200);
-    // Video brightens AFTER logo is fully gone (3200 + 2500 fade = 5700)
-    const t2 = setTimeout(() => setVideoRevealed(true), 5700);
+    // Video brightens 1s earlier — starts during logo fade (3200 + 1500 = 4700)
+    const t2 = setTimeout(() => setVideoRevealed(true), 4700);
 
     return () => {
       clearTimeout(t1);
@@ -31,7 +31,7 @@ export function Hero() {
         setLogoVisible(true);
         setVideoRevealed(false);
         const t1 = setTimeout(() => setLogoVisible(false), 3200);
-        const t2 = setTimeout(() => setVideoRevealed(true), 5700);
+        const t2 = setTimeout(() => setVideoRevealed(true), 4700);
         return () => {
           clearTimeout(t1);
           clearTimeout(t2);
