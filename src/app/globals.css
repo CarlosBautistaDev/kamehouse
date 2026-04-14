@@ -16,23 +16,6 @@
 }
 
 :root {
-  --theme-bg-primary: #FFFFFF;
-  --theme-bg-secondary: #F7F7F8;
-  --theme-bg-dark: #0C0C0C;
-  --theme-bg-elevated: #FFFFFF;
-  --theme-text-primary: #1A1A1A;
-  --theme-text-secondary: #6B7280;
-  --theme-text-tertiary: #9CA3AF;
-  --accent-glow: rgba(255, 107, 53, 0.2);
-  --glass-bg: rgba(255, 255, 255, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-hover: rgba(255, 255, 255, 0.55);
-  --glass-dark-bg: rgba(0, 0, 0, 0.4);
-  --glass-dark-border: rgba(255, 255, 255, 0.1);
-}
-
-/* ===== DARK MODE OVERRIDES ===== */
-html.dark {
   --theme-bg-primary: #0C0C0C;
   --theme-bg-secondary: #141416;
   --theme-bg-dark: #000000;

@@ -4,23 +4,17 @@ import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/Button";
 
 export function Hero() {
-  const [isDark, setIsDark] = useState(true);
   const [textVisible, setTextVisible] = useState(true);
   const [mounted, setMounted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setMounted(true);
-    const check = () => setIsDark(document.documentElement.classList.contains("dark"));
-    check();
-    const observer = new MutationObserver(check);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
     // Fade out text after 4 seconds
     const timer = setTimeout(() => setTextVisible(false), 4000);
 
     return () => {
-      observer.disconnect();
       clearTimeout(timer);
     };
   }, []);
@@ -66,11 +60,9 @@ export function Hero() {
 
       {/* Gradient overlay */}
       <div
-        className="absolute inset-0 z-[1] transition-all duration-700"
+        className="absolute inset-0 z-[1]"
         style={{
-          background: isDark
-            ? "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.5) 70%, #0C0C0C 100%)"
-            : "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, white 100%)",
+          background: "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.5) 70%, #0C0C0C 100%)",
         }}
       />
 

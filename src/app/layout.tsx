@@ -105,13 +105,18 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      suppressHydrationWarning
-      className={`${bebasNeue.variable} ${inter.variable} h-full antialiased`}
+      className={`dark ${bebasNeue.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_io/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_io/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_io/favicon-16x16.png" />
+        <link rel="icon" href="/images/favicon_io/favicon.ico" />
+        <link rel="manifest" href="/images/favicon_io/site.webmanifest" />
+        <meta name="theme-color" content="#0C0C0C" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}if(history.scrollRestoration)history.scrollRestoration='manual';window.scrollTo(0,0);if(location.hash){history.replaceState(null,'',location.pathname+location.search)}})()`,
+            __html: `(function(){if(history.scrollRestoration)history.scrollRestoration='manual';window.scrollTo(0,0);if(location.hash){history.replaceState(null,'',location.pathname+location.search)}})()`,
           }}
         />
         <script

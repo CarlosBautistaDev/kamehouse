@@ -1,18 +1,20 @@
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { NAV_SECTIONS, CONTACT } from "@/lib/constants";
+import Image from "next/image";
 
 export function Footer() {
   return (
     <footer className="bg-bg-dark py-16 px-4">
       <div className="max-w-5xl mx-auto">
         <AnimatedSection>
-          <div className="text-center mb-10">
-            <h2 className="font-heading text-4xl text-white mb-1">
-              KAME HOUSE
-            </h2>
-            <p className="font-heading text-xl text-accent-primary tracking-[0.2em]">
-              TRAINING
-            </p>
+          <div className="flex justify-center mb-10">
+            <Image
+              src="/images/kh-logo.png"
+              alt="Kame House Training logo"
+              width={180}
+              height={180}
+              className="w-36 md:w-44 h-auto"
+            />
           </div>
 
           {/* Nav links */}
