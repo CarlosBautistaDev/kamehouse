@@ -154,7 +154,6 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
       zIndex: z,
       opacity: op,
       filter: blurPx > 0 ? `blur(${blurPx}px)` : "none",
-      animation: isActive && !dragging.current ? "breathe 4s ease-in-out infinite" : "none",
       transition: dragging.current ? "none" : "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
       willChange: "transform, opacity, filter",
       pointerEvents: isActive ? "auto" : "none",
@@ -186,7 +185,7 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
                 src={service.image}
                 alt={service.title}
                 fill
-                className="object-cover"
+                className={`object-cover${index === activeIndex ? " animate-[breathe_10s_ease-in-out_infinite]" : ""}`}
                 sizes="315px"
                 priority={index === 0}
                 draggable={false}
