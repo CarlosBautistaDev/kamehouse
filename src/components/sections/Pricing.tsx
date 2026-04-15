@@ -34,18 +34,18 @@ export function Pricing() {
   }, []);
 
   // Esferas izquierda: arriba, detrás de las primeras cards, crece mucho
-  const esferasIzqScale = isMobile ? 0.6 + progress * 4.0 : 0.8 + progress * 3.5;
+  const esferasIzqScale = 0.6 + progress * 4.0;
   const esferasIzqY = -progress * 40;
 
   // Esferas derecha: centro, más pequeña 0.5→2.3x
-  const esferasDerScale = isMobile ? 0.4 + progress * 1.8 : 0.5 + progress * 1.8;
+  const esferasDerScale = 0.4 + progress * 1.8;
   const esferasDerY = -progress * 20;
 
   return (
-    <section ref={sectionRef} id="precios" className="relative py-24 md:py-32 px-4 bg-bg-primary overflow-hidden">
+    <section ref={sectionRef} id="precios" className="relative py-24 px-4 bg-bg-primary overflow-hidden">
       {/* Esferas izquierda — top-left, behind first 3 cards */}
       <div
-        className="absolute -left-[10%] top-[5%] w-[60%] md:w-[45%] pointer-events-none"
+        className="absolute -left-[10%] top-[5%] w-[60%] pointer-events-none"
         style={{
           transform: `scale(${esferasIzqScale}) translateY(${esferasIzqY}px)`,
           transformOrigin: "left top",
@@ -62,7 +62,7 @@ export function Pricing() {
 
       {/* Esferas derecha — center-right, smaller */}
       <div
-        className="absolute -right-[5%] top-[38%] w-[50%] md:w-[35%] pointer-events-none"
+        className="absolute -right-[5%] top-[38%] w-[50%] pointer-events-none"
         style={{
           transform: `scale(${esferasDerScale}) translateY(${esferasDerY}px)`,
           transformOrigin: "right center",
@@ -81,7 +81,7 @@ export function Pricing() {
           <p className="text-accent-primary font-semibold text-sm tracking-[0.2em] uppercase text-center mb-3">
             Planes
           </p>
-          <h2 className="font-heading text-5xl md:text-7xl text-center text-text-primary mb-4">
+          <h2 className="font-heading text-5xl text-center text-text-primary mb-4">
             PRECIOS
           </h2>
           <p className="text-text-secondary text-center text-lg mb-16">
@@ -142,7 +142,7 @@ export function Pricing() {
 
         {/* Payment Notice */}
         <AnimatedSection delay={400} animation="blur-up">
-          <div className="rounded-2xl border border-accent-secondary/20 bg-accent-secondary/5 p-6 md:p-8 max-w-2xl mx-auto">
+          <div className="rounded-2xl border border-accent-secondary/20 bg-accent-secondary/5 p-6 max-w-2xl mx-auto">
             <h4 className="font-heading text-xl text-accent-secondary mb-4">
               ⚠️ AVISO IMPORTANTE
             </h4>
