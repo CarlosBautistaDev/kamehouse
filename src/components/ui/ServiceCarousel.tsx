@@ -77,8 +77,8 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
     if (!dragging.current) return;
     dragging.current = false;
     const diff = currentX.current - startX.current;
-    if (diff < -60) goTo(activeIndex - 1);
-    else if (diff > 60) goTo(activeIndex + 1);
+    if (diff < -60) goTo(activeIndex + 1);
+    else if (diff > 60) goTo(activeIndex - 1);
     else setDragDelta(0);
   }, [activeIndex, goTo]);
 
@@ -101,8 +101,8 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
     if (!dragging.current) return;
     dragging.current = false;
     const diff = currentX.current - startX.current;
-    if (diff < -60) goTo(activeIndex - 1);
-    else if (diff > 60) goTo(activeIndex + 1);
+    if (diff < -60) goTo(activeIndex + 1);
+    else if (diff > 60) goTo(activeIndex - 1);
     else setDragDelta(0);
   }, [activeIndex, goTo]);
 
@@ -152,7 +152,7 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
       transform: `translateX(${tx}px) scale(${sc}) perspective(800px) rotateY(${ry}deg)`,
       zIndex: z,
       opacity: op,
-      transition: dragging.current ? "none" : "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+      transition: dragging.current ? "none" : "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
       willChange: "transform, opacity",
       pointerEvents: isActive ? "auto" : "none",
     };
