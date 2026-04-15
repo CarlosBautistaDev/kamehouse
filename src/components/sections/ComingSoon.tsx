@@ -103,7 +103,7 @@ export function ComingSoon() {
   }, []);
 
   const CARD_W = 300;
-  const CARD_H = CARD_W * 1.35;
+  const CARD_H = CARD_W * 1.4;
   const SIDE_OFFSET = CARD_W * 0.7;
 
   const getStyle = (index: number): React.CSSProperties => {
