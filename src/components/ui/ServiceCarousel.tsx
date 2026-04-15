@@ -77,8 +77,8 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
     if (!dragging.current) return;
     dragging.current = false;
     const diff = currentX.current - startX.current;
-    if (diff < -40) goTo(activeIndex + 1);
-    else if (diff > 40) goTo(activeIndex - 1);
+    if (diff < -60) goTo(activeIndex + 1);
+    else if (diff > 60) goTo(activeIndex - 1);
     else setDragDelta(0);
   }, [activeIndex, goTo]);
 
@@ -101,8 +101,8 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
     if (!dragging.current) return;
     dragging.current = false;
     const diff = currentX.current - startX.current;
-    if (diff < -40) goTo(activeIndex + 1);
-    else if (diff > 40) goTo(activeIndex - 1);
+    if (diff < -60) goTo(activeIndex + 1);
+    else if (diff > 60) goTo(activeIndex - 1);
     else setDragDelta(0);
   }, [activeIndex, goTo]);
 
@@ -123,25 +123,12 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
     return () => window.removeEventListener("keydown", handleKey);
   }, [activeIndex, goTo]);
 
-  // Card width in px for calculations
-  const CARD_W = 240;
-  const GAP = 16;
+  const CARD_W = 260;
 
   const getStyle = (index: number): React.CSSProperties => {
-    let offset = index - activeIndex;
-    if (offset > Math.floor(total / 2)) offset -= total;
-    if (offset < -Math.floor(total / 2)) offset += total;
-
-    // Convert drag px to fraction of card width
-    const dragFraction = dragDelta / (CARD_W + GAP);
-    const pos = offset - dragFraction;
-    const absPos = Math.abs(pos);
-
-    const tx = pos * (CARD_W * 0.55 + GAP);
-    const sc = Math.max(0.78, 1 - absPos * 0.1);
-    const z = 10 - Math.round(absPos);
-    const op = absPos > 1.6 ? 0 : Math.max(0.5, 1 - absPos * 0.3);
-    const ry = pos * -4;
+    const isActive = index === activeIndex;
+    // Drag: shift active card horizontally to give feedback
+    const tx = isActive ? dragDelta * 0.3 : 0;
 
     return {
       position: "absolute",
@@ -151,12 +138,12 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
       marginLeft: -CARD_W / 2,
       marginTop: -(CARD_W * 1.4) / 2,
       height: CARD_W * 1.4,
-      transform: `translateX(${tx}px) scale(${sc}) perspective(1000px) rotateY(${ry}deg)`,
-      zIndex: z,
-      opacity: op,
-      transition: dragging.current ? "none" : "all 0.4s cubic-bezier(0.32, 0.72, 0, 1)",
+      transform: isActive ? `translateX(${tx}px) scale(1)` : "scale(0.92)",
+      zIndex: isActive ? 2 : 1,
+      opacity: isActive ? 1 : 0,
+      transition: dragging.current ? "opacity 0.15s ease" : "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
       willChange: "transform, opacity",
-      pointerEvents: index === activeIndex ? "auto" : "none",
+      pointerEvents: isActive ? "auto" : "none",
     };
   };
 
@@ -165,7 +152,7 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
       <div
         ref={containerRef}
         className="relative w-full select-none overflow-hidden"
-        style={{ height: CARD_W * 1.4 + 40, touchAction: "pan-y" }}
+        style={{ height: CARD_W * 1.4 + 20, touchAction: "pan-y" }}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
