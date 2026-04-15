@@ -334,7 +334,12 @@ html.dark ::-webkit-scrollbar-thumb:hover {
 
 /* Prevent layout shift from Safari bar resize */
 html {
+  overflow-x: hidden;
   overflow-y: scroll;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 @supports (height: 100svh) {

@@ -40,15 +40,45 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
     [total]
   );
 
+  const touchStartY = useRef(0);
+  const isHorizontalSwipe = useRef<boolean | null>(null);
+
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchCurrentX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    isHorizontalSwipe.current = null;
     isDragging.current = true;
   }, []);
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
     if (!isDragging.current) return;
-    touchCurrentX.current = e.touches[0].clientX;
+
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+
+    // Determine swipe direction on first significant move
+    if (isHorizontalSwipe.current === null) {
+      const dx = Math.abs(currentX - touchStartX.current);
+      const dy = Math.abs(currentY - touchStartY.current);
+      if (dx + dy > 10) {
+        isHorizontalSwipe.current = dx > dy;
+      }
+    }
+
+    // If vertical scroll, bail out
+    if (isHorizontalSwipe.current === false) {
+      isDragging.current = false;
+      setDragOffset(0);
+      return;
+    }
+
+    // Horizontal swipe — prevent page scroll
+    if (isHorizontalSwipe.current) {
+      e.preventDefault();
+    }
+
+    touchCurrentX.current = currentX;
     const diff = touchCurrentX.current - touchStartX.current;
     setDragOffset(diff);
   }, []);
@@ -154,7 +184,7 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
       <div
         ref={containerRef}
         className="relative w-full overflow-hidden select-none"
-        style={{ height: "clamp(420px, 65vh, 520px)" }}
+        style={{ height: "clamp(420px, 65vh, 520px)", touchAction: "pan-y" }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}

@@ -16,7 +16,7 @@ const servicesWithImages = SERVICES.map((service) => ({
 
 export function Services() {
   return (
-    <section id="servicios" className="py-24 md:py-32 bg-bg-primary">
+    <section id="servicios" className="py-24 md:py-32 bg-bg-primary overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">
         <AnimatedSection animation="blur-scale">
           <p className="text-accent-primary font-semibold text-sm tracking-[0.2em] uppercase text-center mb-3">
