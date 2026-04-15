@@ -123,8 +123,8 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
     return () => window.removeEventListener("keydown", handleKey);
   }, [activeIndex, goTo]);
 
-  const CARD_W = 300;
-  const CARD_H = CARD_W * 1.4;
+  const CARD_W = 315;
+  const CARD_H = CARD_W * 1.75;
   const SIDE_OFFSET = CARD_W * 0.7;
 
   const getStyle = (index: number): React.CSSProperties => {
@@ -161,11 +161,11 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full overflow-hidden">
       <div
         ref={containerRef}
-        className="relative w-full select-none overflow-hidden py-6"
-        style={{ height: CARD_H + 20, touchAction: "pan-y" }}
+        className="relative w-full select-none overflow-visible py-6"
+        style={{ height: CARD_H + 40, touchAction: "pan-y" }}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
@@ -186,19 +186,22 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
                 alt={service.title}
                 fill
                 className="object-cover"
-                sizes="240px"
+                sizes="315px"
                 priority={index === 0}
                 draggable={false}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-5">
-                <span className="text-3xl mb-2 block drop-shadow-lg">{service.emoji}</span>
-                <h3 className="font-heading text-3xl text-white mb-1.5 drop-shadow-lg">
-                  {service.title}
-                </h3>
-                <p className="text-white/75 text-sm leading-relaxed line-clamp-2">
-                  {service.description}
-                </p>
+              {/* Liquid glass footer panel */}
+              <div className="absolute inset-x-0 bottom-0 h-[28%] rounded-t-2xl overflow-hidden">
+                <div className="absolute inset-0 backdrop-blur-xl bg-black/40 border-t border-white/15" />
+                <div className="relative z-10 h-full flex flex-col justify-center px-5">
+                  <span className="text-2xl mb-1 block">{service.emoji}</span>
+                  <h3 className="font-heading text-2xl text-white mb-0.5">
+                    {service.title}
+                  </h3>
+                  <p className="text-white/70 text-xs leading-relaxed line-clamp-2">
+                    {service.description}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
