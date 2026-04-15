@@ -256,6 +256,11 @@ body {
   50% { opacity: 0.5; transform: translateY(8px); }
 }
 
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
 /* ===== ANIMATION UTILITIES ===== */
 .animate-fade-in-up {
   animation: fade-in-up 0.7s ease-out forwards;

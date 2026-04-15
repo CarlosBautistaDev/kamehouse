@@ -136,7 +136,7 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
     const dragShift = isActive ? dragDelta * 0.25 : 0;
 
     const tx = offset * SIDE_OFFSET + dragShift;
-    const sc = isActive ? 1.05 : 0.78;
+    const sc = isActive ? 1 : 0.78;
     const op = Math.abs(offset) > 1 ? 0 : isActive ? 1 : 0.5;
     const ry = offset * 12;
     const z = isActive ? 3 : 1;
@@ -154,6 +154,7 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
       zIndex: z,
       opacity: op,
       filter: blurPx > 0 ? `blur(${blurPx}px)` : "none",
+      animation: isActive && !dragging.current ? "breathe 4s ease-in-out infinite" : "none",
       transition: dragging.current ? "none" : "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
       willChange: "transform, opacity, filter",
       pointerEvents: isActive ? "auto" : "none",
@@ -190,15 +191,26 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
                 priority={index === 0}
                 draggable={false}
               />
-              {/* Liquid glass footer panel */}
+              {/* Liquid glass footer panel — multi-layer */}
               <div className="absolute inset-x-0 bottom-0 h-[28%] rounded-t-2xl overflow-hidden">
-                <div className="absolute inset-0 backdrop-blur-xl bg-black/40 border-t border-white/15" />
+                {/* Layer 1: Blur filter */}
+                <div className="absolute inset-0 backdrop-blur-[10px] [-webkit-backdrop-filter:blur(10px)]" />
+                {/* Layer 2: Tinted overlay */}
+                <div className="absolute inset-0 bg-white/[0.02]" />
+                {/* Layer 3: Specular highlight */}
+                <div
+                  className="absolute inset-0 rounded-t-2xl"
+                  style={{
+                    boxShadow: "inset 1px 1px 0 rgba(255,255,255,0.75), inset 0 0 5px rgba(255,255,255,0.75)",
+                  }}
+                />
+                {/* Content */}
                 <div className="relative z-10 h-full flex flex-col justify-center px-5">
                   <span className="text-2xl mb-1 block">{service.emoji}</span>
-                  <h3 className="font-heading text-2xl text-white mb-0.5">
+                  <h3 className="font-heading text-2xl text-white mb-0.5" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.25)" }}>
                     {service.title}
                   </h3>
-                  <p className="text-white/70 text-xs leading-relaxed line-clamp-2">
+                  <p className="text-white/70 text-xs leading-relaxed line-clamp-2" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.25)" }}>
                     {service.description}
                   </p>
                 </div>

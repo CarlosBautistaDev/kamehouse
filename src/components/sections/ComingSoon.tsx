@@ -103,7 +103,7 @@ export function ComingSoon() {
   }, []);
 
   const CARD_W = 300;
-  const CARD_H = CARD_W * 1.4;
+  const CARD_H = CARD_W * 1.75;
   const SIDE_OFFSET = CARD_W * 0.7;
 
   const getStyle = (index: number): React.CSSProperties => {
@@ -157,7 +157,7 @@ export function ComingSoon() {
         {/* Swipeable image carousel */}
         <div
           className="relative w-full select-none overflow-hidden py-6"
-          style={{ height: CARD_H + 20, touchAction: "pan-y" }}
+          style={{ height: CARD_H + 40, touchAction: "pan-y" }}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
@@ -174,12 +174,6 @@ export function ComingSoon() {
             >
               <div
                 className="relative w-full h-full rounded-2xl overflow-hidden ring-1 ring-white/10"
-                style={{
-                  boxShadow:
-                    index === activeIndex
-                      ? "0 25px 60px rgba(0,0,0,0.5), 0 0 30px rgba(255,107,53,0.15)"
-                      : "0 15px 40px rgba(0,0,0,0.35)",
-                }}
               >
                 <Image
                   src={img.src}
