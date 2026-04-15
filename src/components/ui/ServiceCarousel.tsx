@@ -136,10 +136,11 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
     const dragShift = isActive ? dragDelta * 0.25 : 0;
 
     const tx = offset * SIDE_OFFSET + dragShift;
-    const sc = isActive ? 1 : 0.82;
-    const op = Math.abs(offset) > 1 ? 0 : isActive ? 1 : 0.55;
-    const ry = offset * 8; // left card rotates left, right rotates right
+    const sc = isActive ? 1.05 : 0.78;
+    const op = Math.abs(offset) > 1 ? 0 : isActive ? 1 : 0.5;
+    const ry = offset * 12;
     const z = isActive ? 3 : 1;
+    const blurPx = isActive ? 0 : 3;
 
     return {
       position: "absolute",
@@ -149,14 +150,12 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
       marginLeft: -CARD_W / 2,
       marginTop: -CARD_H / 2,
       height: CARD_H,
-      transform: `translateX(${tx}px) scale(${sc}) perspective(800px) rotateY(${ry}deg)`,
+      transform: `translateX(${tx}px) scale(${sc}) perspective(600px) rotateY(${ry}deg)`,
       zIndex: z,
       opacity: op,
-      boxShadow: isActive
-        ? "0 12px 35px rgba(200, 200, 210, 0.35), 0 4px 16px rgba(180, 180, 190, 0.25)"
-        : "0 6px 16px rgba(0,0,0,0.15)",
+      filter: blurPx > 0 ? `blur(${blurPx}px)` : "none",
       transition: dragging.current ? "none" : "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-      willChange: "transform, opacity",
+      willChange: "transform, opacity, filter",
       pointerEvents: isActive ? "auto" : "none",
     };
   };
@@ -179,7 +178,7 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
           <div
             key={service.id}
             style={getStyle(index)}
-            className="rounded-3xl overflow-hidden shadow-2xl"
+            className="rounded-3xl overflow-hidden ring-1 ring-white/20"
           >
             <div className="relative w-full h-full">
               <Image
