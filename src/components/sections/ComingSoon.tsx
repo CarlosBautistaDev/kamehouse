@@ -131,6 +131,9 @@ export function ComingSoon() {
       transform: `translateX(${tx}px) scale(${sc}) perspective(800px) rotateY(${ry}deg)`,
       zIndex: z,
       opacity: op,
+      boxShadow: isActive
+        ? "0 20px 60px rgba(255, 107, 53, 0.3), 0 8px 24px rgba(230, 57, 70, 0.2), 0 0 80px rgba(255, 107, 53, 0.12)"
+        : "0 8px 20px rgba(0,0,0,0.2)",
       transition: dragging.current ? "none" : "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
       willChange: "transform, opacity",
       pointerEvents: isActive ? "auto" : "none",

@@ -152,6 +152,9 @@ export function ServiceCarousel({ services }: ServiceCarouselProps) {
       transform: `translateX(${tx}px) scale(${sc}) perspective(800px) rotateY(${ry}deg)`,
       zIndex: z,
       opacity: op,
+      boxShadow: isActive
+        ? "0 20px 60px rgba(200, 200, 210, 0.35), 0 8px 24px rgba(180, 180, 190, 0.25), 0 0 80px rgba(200, 200, 210, 0.15)"
+        : "0 8px 20px rgba(0,0,0,0.2)",
       transition: dragging.current ? "none" : "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
       willChange: "transform, opacity",
       pointerEvents: isActive ? "auto" : "none",
