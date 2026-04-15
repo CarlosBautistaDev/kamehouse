@@ -67,8 +67,8 @@ export function ComingSoon() {
     if (!dragging.current) return;
     dragging.current = false;
     const diff = currentX.current - startX.current;
-    if (diff < -60) goTo(activeIndex + 1);
-    else if (diff > 60) goTo(activeIndex - 1);
+    if (diff < -60) goTo(activeIndex - 1);
+    else if (diff > 60) goTo(activeIndex + 1);
     else setDragDelta(0);
   }, [activeIndex, goTo]);
 
@@ -90,8 +90,8 @@ export function ComingSoon() {
     if (!dragging.current) return;
     dragging.current = false;
     const diff = currentX.current - startX.current;
-    if (diff < -60) goTo(activeIndex + 1);
-    else if (diff > 60) goTo(activeIndex - 1);
+    if (diff < -60) goTo(activeIndex - 1);
+    else if (diff > 60) goTo(activeIndex + 1);
     else setDragDelta(0);
   }, [activeIndex, goTo]);
 
@@ -103,10 +103,22 @@ export function ComingSoon() {
   }, []);
 
   const CARD_W = 300;
+  const CARD_H = CARD_W * 1.35;
+  const SIDE_OFFSET = CARD_W * 0.7;
 
   const getStyle = (index: number): React.CSSProperties => {
-    const isActive = index === activeIndex;
-    const tx = isActive ? dragDelta * 0.3 : 0;
+    let offset = index - activeIndex;
+    if (offset > Math.floor(total / 2)) offset -= total;
+    if (offset < -Math.floor(total / 2)) offset += total;
+
+    const isActive = offset === 0;
+    const dragShift = isActive ? dragDelta * 0.25 : 0;
+
+    const tx = offset * SIDE_OFFSET + dragShift;
+    const sc = isActive ? 1 : 0.82;
+    const op = Math.abs(offset) > 1 ? 0 : isActive ? 1 : 0.55;
+    const ry = offset * 8;
+    const z = isActive ? 3 : 1;
 
     return {
       position: "absolute",
@@ -114,12 +126,12 @@ export function ComingSoon() {
       top: "50%",
       width: CARD_W,
       marginLeft: -CARD_W / 2,
-      marginTop: -(CARD_W * 1.35) / 2,
-      height: CARD_W * 1.35,
-      transform: isActive ? `translateX(${tx}px) scale(1)` : "scale(0.92)",
-      zIndex: isActive ? 2 : 1,
-      opacity: isActive ? 1 : 0,
-      transition: dragging.current ? "opacity 0.15s ease" : "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+      marginTop: -CARD_H / 2,
+      height: CARD_H,
+      transform: `translateX(${tx}px) scale(${sc}) perspective(800px) rotateY(${ry}deg)`,
+      zIndex: z,
+      opacity: op,
+      transition: dragging.current ? "none" : "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
       willChange: "transform, opacity",
       pointerEvents: isActive ? "auto" : "none",
     };
@@ -143,7 +155,7 @@ export function ComingSoon() {
         {/* Swipeable image carousel */}
         <div
           className="relative w-full select-none overflow-hidden"
-          style={{ height: CARD_W * 1.35 + 20, touchAction: "pan-y" }}
+          style={{ height: CARD_H + 20, touchAction: "pan-y" }}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
