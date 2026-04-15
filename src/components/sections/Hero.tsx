@@ -55,7 +55,7 @@ export function Hero() {
         loop
         playsInline
         preload="auto"
-        className="absolute inset-0 w-full h-full object-cover md:hidden"
+        className="absolute inset-0 w-full h-full object-cover xl:hidden"
         style={{
           filter: videoRevealed
             ? "grayscale(100%) brightness(0.55)"
@@ -70,7 +70,7 @@ export function Hero() {
 
       {/* Background image — desktop only */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden xl:block"
         style={{ backgroundImage: "url(/images/hero-bg.jpg)" }}
       />
 
