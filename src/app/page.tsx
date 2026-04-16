@@ -3,6 +3,7 @@ import { Services } from "@/components/sections/Services";
 import { Schedule } from "@/components/sections/Schedule";
 import { Pricing } from "@/components/sections/Pricing";
 import { ComingSoon } from "@/components/sections/ComingSoon";
+import { Cafeteria } from "@/components/sections/Cafeteria";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 import { ShenglongStats } from "@/components/sections/ShenglongStats";
@@ -46,6 +47,7 @@ export default function Home() {
       </ParallaxSection>
 
       <ComingSoon />
+      <Cafeteria />
       <Contact />
       <Footer />
 
